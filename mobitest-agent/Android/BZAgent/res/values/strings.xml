@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Blaze Agent</string>
+    <string name="status_enabled">Polling Enabled</string>
+    <string name="status_disabled">Polling Disabled</string>
+    <string name="status_polling">Polling</string>
+    <string name="status_uploading">Uploading</string>
+    <string name="status_failedToPoll">Failed to poll</string>
+    <string name="status_failedToUpload">Failed to upload</string>
+    <string name="poll_now">Poll Now</string>
+    <string name="start_polling">Start Polling</string>
+    <string name="stop_polling">Stop Polling</string>
+    <string name="settings">Settings</string>
+    <string name="agent_settings">Agent Settings</string>
+    <string name="recording_settings">Recording Settings</string>
+    <string name="location">Location</string>
+    <string name="unique_name">Unique Name</string>
+    <string name="location_key">Location Key</string>
+    <string name="fps">FPS</string>
+    <string name="delay">End Timing Delay</string>
+    <string name="timeout">Timeout</string>
+    <string name="net_interface">Network Interface (TCPDUMP)</string>
+    <string name="tcpdump_prio">TCPDUMP Priority (NICE)</string>
+    <string name="polling_frequency">Polling Frequency</string>
+    <string name="job_url1">Job URL 1</string>
+    <string name="job_url2">Job URL 2</string>
+    <string name="job_url3">Job URL 3</string>
+    <string name="job_url4">Job URL 4</string>
+    <string name="base_path">Base Path</string>
+    <string name="advanced">Advanced</string>
+    
+<string name="recording_important">Enable Screenshots</string>
+<string name="autopoll_on_start">Start Polling on Launch</string>
+<string name="restart_between_jobs">Restart Between Jobs</string>
+</resources>

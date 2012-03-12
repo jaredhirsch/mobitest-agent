@@ -1,0 +1,23 @@
+The iOS Agent has several dependencies. 
+
+Except for the CocoaWithLove headers, the other dependencies should be downloaded from their respective repositories and built.
+The Xcode project may need to be updated to point to the correct location for those dependencies.
+
+ASI HTTP Request
+================
+Get it at https://github.com/pokeb/asi-http-request
+It is permissively licensed: https://github.com/pokeb/asi-http-request/blob/master/LICENSE
+
+TouchJSON
+=========
+Get it at https://github.com/schwa/touchcode (the TouchJSON variant is found at https://github.com/schwa/TouchJSON)
+TouchJSON is MIT licensed (https://github.com/schwa/TouchJSON/blob/master/LICENSE.txt)
+
+ZipKit
+======
+Get it at http://bitbucket.org/kolpanic/zipkit/wiki/Home
+ZipKit is offered under the BSD license.
+
+CocoaWithLove
+=============
+Permissively licensed and included with the project.

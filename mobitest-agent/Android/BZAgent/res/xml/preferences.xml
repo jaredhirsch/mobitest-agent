@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceCategory android:title="@string/agent_settings">
+<EditTextPreference android:key="url1" android:title="@string/job_url1" android:summary="URL1 to poll from" android:enabled="true"></EditTextPreference>
+<EditTextPreference android:key="url2" android:title="@string/job_url2" android:summary="URL2 to poll from" android:enabled="true"></EditTextPreference>
+<EditTextPreference android:key="url3" android:title="@string/job_url3" android:summary="URL3 to poll from" android:enabled="true"></EditTextPreference>
+<EditTextPreference android:key="url4" android:title="@string/job_url4" android:summary="URL4 to poll from" android:enabled="true"></EditTextPreference>
+<EditTextPreference android:key="location" android:title="@string/location"></EditTextPreference>
+<EditTextPreference android:key="unique_name" android:title="@string/unique_name"></EditTextPreference>
+<EditTextPreference android:key="location_key" android:title="@string/location_key"></EditTextPreference>
+
+<EditTextPreference android:key="polling_frequency" android:title="@string/polling_frequency"></EditTextPreference>
+<EditTextPreference android:key="timeout" android:title="@string/timeout"></EditTextPreference>
+
+<EditTextPreference android:key="net_interface" android:title="@string/net_interface"></EditTextPreference>
+<EditTextPreference android:key="delay" android:title="@string/delay" android:defaultValue="2"></EditTextPreference>
+<CheckBoxPreference android:title="@string/autopoll_on_start" android:key="autopoll_on_start" android:defaultValue="false"></CheckBoxPreference>
+<CheckBoxPreference android:title="@string/restart_between_jobs" android:key="restart_between_jobs" android:defaultValue="false"></CheckBoxPreference>
+</PreferenceCategory>
+<PreferenceCategory android:title="@string/recording_settings">
+<ListPreference android:title="@string/fps" android:key="fps" android:entryValues="@array/FPSValues" android:entries="@array/FPS"></ListPreference>
+<CheckBoxPreference android:title="@string/recording_important" android:key="captureImportant" android:summary="Check to enable default screenshots" android:defaultValue="true"/>
+</PreferenceCategory>
+<PreferenceCategory android:title="@string/advanced">
+<EditTextPreference android:key="tcpdump_prio" android:title="@string/tcpdump_prio"></EditTextPreference>
+<EditTextPreference android:key="base_path" android:title="@string/base_path"></EditTextPreference>
+</PreferenceCategory>
+</PreferenceScreen>

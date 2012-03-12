@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="FPSValues">
+	<item>1</item>
+	<item>2</item>
+	<item>5</item>
+	<item>10</item>
+</string-array>
+<string-array name="FPS">
+	<item>1 FPS</item>
+	<item>2 FPS</item>
+	<item>5 FPS</item>
+	<item>10 FPS</item>
+</string-array>
+</resources>

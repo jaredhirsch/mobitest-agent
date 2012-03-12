@@ -1,0 +1,77 @@
+NOTE: The applications are still called "Blaze", since they were written for blaze.io, but they may get renamed in the future.
+
+Pre-requisits
+=============
+The Android Agent supports Android 2.2 or newer, has been tested on 2.2, 2.3, 2.4 and 3.1.
+While it SHOULD work on any rooted Android device, it was only tested on nexus-s, nexus one, galaxy s, motorola atrix and motorla xoom.
+
+The Android agent requires webpagetest 2.5 or newer. 
+If you installed webpagetest from one of the bundled packages in a private instance, you'll need to also check out the "mobile" folder (http://webpagetest.googlecode.com/svn/trunk/www/webpagetest/mobile/). 
+The mobile folder requires python on the server, and has only been tested on a linux server (not a windows server).
+
+You must have a rooted phone. In most cases you can install a mod (e.g. CyanogenMod, http://www.cyanogenmod.com/), which bundles many of the other requirements.
+However, note that some Android manufacturers modify the browser settings, and installing a mod may override those, and affect performance results.
+	
+You must have the 'su' command installed. (Comes packaged in Cyanogen)
+	
+You will need to install tcpdump if it's not installed with your ROM.  (CyanogenMod packages it already).
+It should be accessible from the $PATH. (In Cyanogen it's in /system/xbin).
+
+You must give the data folder permissions. 
+The easiest way to do that is to set read and write priviledges for /data (chmod 777 /data).
+The application settings also allow setting a different location for storing the app data.
+
+You may need to specify your network interface.  If the agent returns no values, open 'adb shell' and type 'ethcfg'.  Add this setting in-app.
+
+Note that since the agent requires a rooted device, you probably can't use it in the Android simulator.
+
+The Android Agent doesn't support location information, and it may cause the app to hang, so it's recommended to turn off location services in your phone's settings.
+
+How To Build
+============
+Download Eclipse and the appropriate Android developer plugin and SDK.
+Open the BZAgent Project from SVN or source, and compile it, or package it as an APK for use on other devices.
+
+Settings
+========
+Once installed, open the app, click the "menu" button and enter the "Settings" menu. 
+There you will find sevreal settings, explained in detail below.
+
+Usage
+=====
+Once installed and configured, simply run the app. If polling doesn't automatically start (see auto-poll setting below), you can manually poll or turn it on. 
+Submit a test using your webpagetest server to the relevant location, and you should see the page loading and reporting results to the server.
+
+
+Settings Description
+====================
+Job URL 1: The Webpagetest server to poll (Required)
+Job URL 2-4: The agent can optionally poll up to 3 more servers, rotating through them (Optional)
+Location: The Webpagetest location
+Unique Name: A unique name for this device (Optional, only used if using several devices in one location)
+Location Key: The key for said location
+Polling Frequency: How frequently to poll the server if auto-polling
+Timeout: Number of seconds to wait before stating a page has timed out
+
+Network Interface: Optional name of the network interface to capture traffic from, if the default interface isn't detected correctly or not the one to be used.
+
+Start Polling on Launch: Whether to automatically start polling when the app starts. Required if leaving the app running as a server to make sure it starts polling if it restarted due to a crash.
+Restart Between Jobs: Whether to restart the app after every job (uses Android OS hooks). Recommended when leaving the phone running as a server to reduce memory problems.
+
+Frames Per Second: The number of screenshots to take each second when recording video. Note that taking screenshots AFFECTS PERFORMANCE, hence the default of one. You can go as high as ten, but that can easily double the page load time on some devices.
+Enable Screenshots: Whether to capture the milestone screenshots (start render, doc complete, fully loaded). 
+
+TCPDump Priority: Optional "nice" value to increase/decrease the priority of the network capture, useful in rare cases for balancing process on device.
+Base Path: If the /data/ folder cannot be made writeable, use this setting to make the temporary agent data get stored elsewhere.
+
+Known Issues
+============
+- SSL Resources will appear in the waterfall without timing information and with little header information. 
+  This extra information is read from the network capture, which doesn't work for SSL.
+- If WiFi on devices proves unstable, you can use an app such as the free "WiFi Fixer" to try and keep it alive more consistently.
+
+
+
+
+
+

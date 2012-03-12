@@ -1,0 +1,12 @@
+//
+// Prefix header for all source files of the 'BZAgent' target in the 'BZAgent' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+
+	#define ATOMICSTRING_HIDE_GLOBALS
+	#define JS_EXPORTDATA
+	#define JS_EXPORTCLASS
+#endif

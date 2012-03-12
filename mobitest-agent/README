@@ -1,0 +1,14 @@
+Mobitest Agents are mobile apps that measure mobile web performance.
+
+The Mobitest Agents act as mobile agents of a webpagetest (http://www.webpagetest.org) server. 
+They can (and should) be installed on real mobile devices, measure using the platform's embedded browser, and can measure over the network connection that device is using (e.g. WiFi, 3G).
+
+Mobitest was originally written by Blaze (www.blaze.io). 
+Blaze was acquired by Akamai (www.akamai.com) in Feb, 2012, which open-sourced Mobitest a month later (March, 2012).
+NOTE: The applications are still called "Blaze", but they may get renamed in the future.
+
+The hosted Mobitest, which uses the Mobitest Agents in the background, can be found here: http://www.blaze.io/mobile/
+
+The Mobitest Agents also power the Mobile HTTP Archive (mobile.httparchive.org).
+
+

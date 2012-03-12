@@ -1,0 +1,306 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F710259D131028D200C860E9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F710259C131028D200C860E9 /* UIKit.framework */; };
+		F710259F131028D200C860E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F710259E131028D200C860E9 /* Foundation.framework */; };
+		F71025A1131028D200C860E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71025A0131028D200C860E9 /* CoreGraphics.framework */; };
+		F71025A7131028D200C860E9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F71025A5131028D200C860E9 /* InfoPlist.strings */; };
+		F71025AA131028D200C860E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F71025A9131028D200C860E9 /* main.m */; };
+		F71025AD131028D200C860E9 /* BZRecoverAgentAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F71025AC131028D200C860E9 /* BZRecoverAgentAppDelegate.m */; };
+		F746E44B1384766900AD1BED /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = F746E44A1384766900AD1BED /* Entitlements.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F7102598131028D200C860E9 /* BZRecoverAgent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BZRecoverAgent.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F710259C131028D200C860E9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F710259E131028D200C860E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F71025A0131028D200C860E9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F71025A4131028D200C860E9 /* BZRecoverAgent-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BZRecoverAgent-Info.plist"; sourceTree = "<group>"; };
+		F71025A6131028D200C860E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F71025A8131028D200C860E9 /* BZRecoverAgent-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BZRecoverAgent-Prefix.pch"; sourceTree = "<group>"; };
+		F71025A9131028D200C860E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F71025AB131028D200C860E9 /* BZRecoverAgentAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BZRecoverAgentAppDelegate.h; sourceTree = "<group>"; };
+		F71025AC131028D200C860E9 /* BZRecoverAgentAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BZRecoverAgentAppDelegate.m; sourceTree = "<group>"; };
+		F746E44A1384766900AD1BED /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F7102595131028D200C860E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F710259D131028D200C860E9 /* UIKit.framework in Frameworks */,
+				F710259F131028D200C860E9 /* Foundation.framework in Frameworks */,
+				F71025A1131028D200C860E9 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F710258D131028D200C860E9 = {
+			isa = PBXGroup;
+			children = (
+				F746E44A1384766900AD1BED /* Entitlements.plist */,
+				F71025A2131028D200C860E9 /* BZRecoverAgent */,
+				F710259B131028D200C860E9 /* Frameworks */,
+				F7102599131028D200C860E9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F7102599131028D200C860E9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F7102598131028D200C860E9 /* BZRecoverAgent.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F710259B131028D200C860E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F710259C131028D200C860E9 /* UIKit.framework */,
+				F710259E131028D200C860E9 /* Foundation.framework */,
+				F71025A0131028D200C860E9 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F71025A2131028D200C860E9 /* BZRecoverAgent */ = {
+			isa = PBXGroup;
+			children = (
+				F71025AB131028D200C860E9 /* BZRecoverAgentAppDelegate.h */,
+				F71025AC131028D200C860E9 /* BZRecoverAgentAppDelegate.m */,
+				F71025A3131028D200C860E9 /* Supporting Files */,
+			);
+			path = BZRecoverAgent;
+			sourceTree = "<group>";
+		};
+		F71025A3131028D200C860E9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F71025A4131028D200C860E9 /* BZRecoverAgent-Info.plist */,
+				F71025A5131028D200C860E9 /* InfoPlist.strings */,
+				F71025A8131028D200C860E9 /* BZRecoverAgent-Prefix.pch */,
+				F71025A9131028D200C860E9 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F7102597131028D200C860E9 /* BZRecoverAgent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F71025BE131028D200C860E9 /* Build configuration list for PBXNativeTarget "BZRecoverAgent" */;
+			buildPhases = (
+				F7102594131028D200C860E9 /* Sources */,
+				F7102595131028D200C860E9 /* Frameworks */,
+				F7102596131028D200C860E9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BZRecoverAgent;
+			productName = BZRecoverAgent;
+			productReference = F7102598131028D200C860E9 /* BZRecoverAgent.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F710258F131028D200C860E9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = F7102592131028D200C860E9 /* Build configuration list for PBXProject "BZRecoverAgent" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F710258D131028D200C860E9;
+			productRefGroup = F7102599131028D200C860E9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F7102597131028D200C860E9 /* BZRecoverAgent */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F7102596131028D200C860E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F71025A7131028D200C860E9 /* InfoPlist.strings in Resources */,
+				F746E44B1384766900AD1BED /* Entitlements.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F7102594131028D200C860E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F71025AA131028D200C860E9 /* main.m in Sources */,
+				F71025AD131028D200C860E9 /* BZRecoverAgentAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F71025A5131028D200C860E9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F71025A6131028D200C860E9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F71025BC131028D200C860E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F71025BD131028D200C860E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Blaze Software Inc";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=*]" = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F71025BF131028D200C860E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BZRecoverAgent/BZRecoverAgent-Prefix.pch";
+				INFOPLIST_FILE = "BZRecoverAgent/BZRecoverAgent-Info.plist";
+				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F71025C0131028D200C860E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BZRecoverAgent/BZRecoverAgent-Prefix.pch";
+				INFOPLIST_FILE = "BZRecoverAgent/BZRecoverAgent-Info.plist";
+				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		F746E4481384762100AD1BED /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Blaze Software Inc";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Distribution;
+		};
+		F746E4491384762100AD1BED /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BZRecoverAgent/BZRecoverAgent-Prefix.pch";
+				INFOPLIST_FILE = "BZRecoverAgent/BZRecoverAgent-Info.plist";
+				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Distribution;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F7102592131028D200C860E9 /* Build configuration list for PBXProject "BZRecoverAgent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F71025BC131028D200C860E9 /* Debug */,
+				F71025BD131028D200C860E9 /* Release */,
+				F746E4481384762100AD1BED /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F71025BE131028D200C860E9 /* Build configuration list for PBXNativeTarget "BZRecoverAgent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F71025BF131028D200C860E9 /* Debug */,
+				F71025C0131028D200C860E9 /* Release */,
+				F746E4491384762100AD1BED /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F710258F131028D200C860E9 /* Project object */;
+}

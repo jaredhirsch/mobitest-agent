@@ -1,0 +1,60 @@
+NOTE: The applications are still called "Blaze", since they were written for blaze.io, but they may get renamed in the future.
+
+The iOS Mobitest Agent doesn't require jailbreaking your phone or any other installed packages. 
+
+There are actually two separate applications:
+BZAgent - The primary application which acts as the WebPageTest agent
+BZRecoverAgent - A support application that helps recover from crashes and preempt running out of memory
+
+Since iOS devices aren't designed to be servers, the recover agent proved to be a required component for the agents to remain running for a reasonable period of time.
+
+Pre-requisites
+============
+To compile and run, first download and build the dependencies listed in Dependencies/README-DEPENDENCIES
+iOS Agent supports iOS 4.2 and newer, and webpagetest server 2.5 or newer.
+
+The iOS Agent doesn't support location information, and it may cause the app to hang, so it's recommended to turn off location services in your phone's settings.
+
+
+How to Build
+============
+Once the dependencies are compiled and in the project dependencies, simply launch each of the two projects (BZAgent and BZRecoverAgent) and build. 
+
+Settings
+========
+Once installed, open the iPhone Settings and go to the "Blaze Agent" section. 
+There you will find sevreal settings, explained in detail below.
+
+Usage
+=====
+Once installed and configured, simply run the app. If polling doesn't automatically start (see auto-poll setting below), you can manually poll or turn it on. 
+Submit a test using your webpagetest server to the relevant location, and you should see the page loading and reporting results to the server.
+
+Settings Description
+====================
+Jobs URL 1: The Webpagetest server to poll (Required)
+Jobs URL 2-4: The agent can optionally poll up to 3 more servers, rotating through them (Optional)
+Timeout: Number of seconds to wait before stating a page has timed out
+Unique Agent Name: A unique name for this device (Optional, only used if using several devices in one location)
+Location: The Webpagetest location
+Location Key: The key for said location
+
+Polling Frequency: How frequently to poll the server if auto-polling
+Restart After Each Job: Whether to switch to the RecoverAgent after every test and back again. Recommended when leaving the phone running as a server to reduce memory problems.
+Auto-poll: Whether to automatically start polling when the app starts. Required if leaving the app running as a server to make sure it starts polling if it restarted due to a crash
+Max Offline Secs: If we haven't received a new job for that many seconds, restart the application. This helps recover from certain networking issues where the polling requests are somehow invalid.
+
+Frames Per Second: The number of screenshots to take each second when recording video. Note that taking screenshots AFFECTS PERFORMANCE, hence the default of one. You can go as high as ten, but that can easily double the page load time on some devices.
+
+User-Agent String: The default user-agent used in iOS UIWebView is not exactly the same as the one used in MobileSafari. You can use this field to correct it. Simply browse to http://xhaus.com/headers with MobileSafari on the device, copy the value (only the value) of the user-agent request header that got echoed back, and paste that into this setting. Be sure not to include any trailing newlines.
+
+Accept, Accept-Encoding and Accept-Language Header: iOS UIWebView does send these three headers, but they are not exposed through the interfaces. They are therefore manually added to the requests, with the specified values.
+
+Screen Saver Timeout: We've noticed some burn-in on an iPad 2 display, and thus created a screen saver which kicks in after a minute or more. This screensaver doesn't affect the functionality of the app, just prevents a possible burn-in on long running devices.
+
+
+
+
+
+
+

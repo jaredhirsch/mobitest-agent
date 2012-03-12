@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/polling_menu_item"
+			android:icon="@drawable/tick"
+			android:title="@string/start_polling" />
+	<item android:id="@+id/stop_polling_menu_item"
+			android:icon="@drawable/stop"
+			android:title="@string/stop_polling" />
+	<item android:id="@+id/settings_menu_item"
+			android:icon="@drawable/ic_menu_preferences"
+			android:title="@string/settings"/>
+</menu>
