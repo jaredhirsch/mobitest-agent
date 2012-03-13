@@ -20,4 +20,6 @@ ZipKit is offered under the BSD license.
 
 CocoaWithLove
 =============
-Permissively licensed and included with the project.
+Get it at http://cocoawithlove.com/2009/06/base64-encoding-options-on-mac-and.html (direct link to download: http://projectswithlove.com/projects/NSData_Base64.zip)
+The .h and .m files should be placed under the CocoaWithLove subfolder of this Dependencies folder
+Permissively licensed.

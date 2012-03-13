@@ -1,6 +1,6 @@
 Mobitest Agents are mobile apps that measure mobile web performance.
 
-The Mobitest Agents act as mobile agents of a webpagetest (http://www.webpagetest.org) server. 
+The Mobitest Agents act as mobile agents of a webpagetest (https://sites.google.com/a/webpagetest.org/docs/private-instances) server.
 They can (and should) be installed on real mobile devices, measure using the platform's embedded browser, and can measure over the network connection that device is using (e.g. WiFi, 3G).
 
 Mobitest was originally written by Blaze (www.blaze.io). 
