@@ -21,10 +21,14 @@
 	NSString *jobId;
 	NSMutableArray *runs;
 	
+	// What image quality setting should be used to encode screenshots?
+	float screenShotImageQuality;
+
 	BZSession *currentRun;
 }
 
 @property (nonatomic, retain) NSString *jobId;
+@property (nonatomic) float screenShotImageQuality;
 @property (nonatomic, readonly, retain) BZSession *currentRun;
 
 - (void)startSession:(NSString*)title identifier:(NSString*)identifier videoFolder:(NSString*)folder;

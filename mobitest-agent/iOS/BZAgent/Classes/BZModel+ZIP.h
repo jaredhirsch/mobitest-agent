@@ -35,6 +35,6 @@
  * Scales all images to a proper size
  *		Currently only scales down iPhone4 images
  */
-- (void)scaleDownAllImages;
+- (void)scaleDownAllImagesWithScreenshotImageQuality:(float)screenShotImageQuality;
 
 @end

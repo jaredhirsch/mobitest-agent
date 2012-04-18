@@ -355,7 +355,9 @@
 	//Dismiss the web view
 	[self dismissModalViewControllerAnimated:NO];
 	
-	
+	// Compress screenshots with the image quality setting of the job.
+	result.screenShotImageQuality = job.screenShotImageQuality;
+
     //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [idleView showUploading:@"Publishing Results"];
         [[BZJobManager sharedInstance] publishResults:result url:activeURL];

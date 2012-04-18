@@ -24,6 +24,7 @@
 @synthesize url;
 @synthesize runs;
 @synthesize fvOnly;
+@synthesize screenShotImageQuality;
 @synthesize web10;
 @synthesize block;
 @synthesize login;
@@ -49,7 +50,30 @@
 		if (fvOnlyValue) {
 			fvOnly = [fvOnlyValue boolValue];
 		}
-		
+
+		BOOL serverGaveImageQualitySetting = NO;
+
+		NSString *imageQualityValue = [dictionary objectForKey:BZImageQualityKey];
+		if (imageQualityValue != nil) {
+			// If the server specified a value, use that value.
+			// Server should send an integer in [0..100].
+			float imageQuality = [imageQualityValue floatValue];
+			if (imageQuality >= 0.0 && imageQuality <= 100.0) {
+				serverGaveImageQualitySetting = YES;
+				screenShotImageQuality = imageQuality / 100.0;
+			} else {
+				NSLog(@"Server requested image quality %@.  Value must be in the "
+							 "range 0..100. Using local preference value instead.",
+							 imageQualityValue);
+			}
+		}
+
+		if (!serverGaveImageQualitySetting) {
+			// If the server did not specify a valid value, read preferences.
+			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+			screenShotImageQuality = [[defaults objectForKey:kBZImageCheckpointQualitySettingsKey] floatValue];
+		}
+
 		NSString *web10Value = [dictionary objectForKey:BZWeb10Key];
 		if (web10Value) {
 			web10 = [web10Value boolValue];

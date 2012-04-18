@@ -17,6 +17,7 @@
 	//NSString *location; Not supported, this is only local
 	int runs;
 	BOOL fvOnly;
+	float screenShotImageQuality;
 	//NSString *domElement; Not supported, could potentially be added in
 	//BOOL privateFlag; Not supported as of yet
 	//NSInteger numberOfConcurrentConnections; Not supported
@@ -41,6 +42,7 @@
 @property (nonatomic, retain) NSString *url;
 @property (nonatomic, readonly) int runs;
 @property (nonatomic, readonly) BOOL fvOnly;
+@property (nonatomic, readonly) float screenShotImageQuality;
 @property (nonatomic, readonly) BOOL web10;
 @property (nonatomic, readonly, retain) NSString *block;
 @property (nonatomic, readonly, retain) NSString *login;

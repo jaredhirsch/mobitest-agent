@@ -22,6 +22,7 @@
 
 @synthesize currentRun;
 @synthesize jobId;
+@synthesize screenShotImageQuality;
 
 - (id)init
 {

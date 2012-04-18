@@ -14,6 +14,7 @@ const NSString *BZTestIdKey = @"Test ID";
 const NSString *BZURLKey = @"url";
 const NSString *BZDOMElementKey = @"DOMElement";
 const NSString *BZFVOnlyKey = @"fvonly";
+const NSString *BZImageQualityKey = @"imageQuality";
 const NSString *BZObjectKey = @"object";
 const NSString *BZImagesMey = @"images";
 const NSString *BZEventNameKey = @"Event Name";

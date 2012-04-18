@@ -41,6 +41,7 @@ extern const NSString *BZTestIdKey;
 extern const NSString *BZURLKey;
 extern const NSString *BZDOMElementKey;
 extern const NSString *BZFVOnlyKey;
+extern const NSString *BZImageQualityKey;
 extern const NSString *BZObjectKey;
 extern const NSString *BZImagesMey;
 extern const NSString *BZEventNameKey;

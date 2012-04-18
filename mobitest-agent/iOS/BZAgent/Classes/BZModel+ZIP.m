@@ -25,7 +25,7 @@
 
 @implementation BZSession (AvisynthExtension)
 
-- (void)scaleDownImages:(NSArray*)imagePaths quality:(NSNumber*)quality
+- (void)scaleDownImages:(NSArray*)imagePaths quality:(float)quality
 {
 	UIImage *image;
 	UIImage *scaledImage;
@@ -38,7 +38,7 @@
 		
 		/*if ((image.size.width == 640 && image.size.height == 960) || (image.size.width == 768 && image.size.height == 1024) || (image.size.width == 1024 && image.size.height == 768)) {*/
 			scaledImage = [image imageByScalingToSize:CGSizeMake(image.size.width * resizeRatio, image.size.height * resizeRatio)];
-			imageData = UIImageJPEGRepresentation(scaledImage, [quality floatValue]);
+			imageData = UIImageJPEGRepresentation(scaledImage, quality);
 			if (![imageData writeToFile:imagePath atomically:NO]) {
 				NSLog(@"Could not scale %@", imagePath);
 			}
@@ -49,10 +49,10 @@
 	}
 }
 
-- (void)scaleDownAllImages
+- (void)scaleDownAllImagesWithScreenshotImageQuality:(float)screenShotImageQuality
 {
-	[self scaleDownImages:screenshotPaths quality:[[NSUserDefaults standardUserDefaults] objectForKey:kBZImageVideoQualitySettingsKey]];
-	[self scaleDownImages:importantScreenshotPaths quality:[[NSUserDefaults standardUserDefaults] objectForKey:kBZImageCheckpointQualitySettingsKey]];
+	[self scaleDownImages:screenshotPaths quality:[[[NSUserDefaults standardUserDefaults] objectForKey:kBZImageVideoQualitySettingsKey] floatValue]];
+	[self scaleDownImages:importantScreenshotPaths quality:screenShotImageQuality];
 }
 
 - (NSInteger)durationForFPS:(int)fps
@@ -204,7 +204,7 @@
 #if BZ_DEBUG_REQUESTS
         NSLog(@"Scaling down images");
 #endif
-		[session scaleDownAllImages];
+		[session scaleDownAllImagesWithScreenshotImageQuality:screenShotImageQuality];
 	}
 	
 #if BZ_DEBUG_REQUESTS
