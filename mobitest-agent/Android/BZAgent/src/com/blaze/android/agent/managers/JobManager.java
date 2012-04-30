@@ -77,7 +77,7 @@ public final class JobManager implements ResponseListener {
 	private JobManager() {
 		SchemeRegistry supportedSchemes = new SchemeRegistry(); 
         supportedSchemes.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80)); 
-        
+
         HttpParams params = new BasicHttpParams();
         HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1); 
         HttpProtocolParams.setUseExpectContinue(params, false); 
@@ -218,16 +218,18 @@ public final class JobManager implements ResponseListener {
 		return client;
 	}
 
-	public void asyncPcap2har(final WebActivity activity, final String pcapPath, final String harPath) 
+	public void asyncPcap2har(final WebActivity activity, final String pcapPath, final String harPath, boolean experimentalPcap2HarFailed)
 	{
 		String baseUrl = getCurJobUrl();
 		//Rather than invoking the pcap2har script, we hit a web service
 		String pathAndParams = "mobile/pcap2har.php";
 		String url = baseUrl.charAt(baseUrl.length() - 1) == '/' ? baseUrl + pathAndParams : baseUrl + '/' + pathAndParams;
 
-		// Zip up the pcapPath
+		// Zip up the pcapPath.  If |experimentalPcap2HarFailed|, then the zip file
+		// is already present from the first try.
 		File zipPcapFile = new File(pcapPath + ".zip");
-		if (!ZipUtil.zipFile(zipPcapFile, pcapPath, zipPcapFile.getParent(), null)) 
+		if (!experimentalPcap2HarFailed &&
+		    !ZipUtil.zipFile(zipPcapFile, pcapPath, zipPcapFile.getParent(), null))
 		{
 			Log.e(BZ_JOB_MANAGER, "Failed to zip up pcap file to path " + zipPcapFile.getAbsolutePath());
 			activity.processNextRunResult();
@@ -239,19 +241,22 @@ public final class JobManager implements ResponseListener {
 
 		MultipartEntity multipart = new MultipartEntity();
 		multipart.addPart("file", new FileBody(zipPcapFile, "results.pcap.zip", "application/zip"));
-		if (SettingsUtil.getShouldUseExperimentalPcap2har(context)) {
+		boolean useExperimentalPcap2Har = false;
+		if (!experimentalPcap2HarFailed &&
+		    SettingsUtil.getShouldUseExperimentalPcap2har(context)) {
 			try {
 				multipart.addPart("useLatestPCap2Har", new StringBody("1"));
+				useExperimentalPcap2Har = true;
 			}
 			catch (IOException e) {
 				Log.w(BZ_JOB_MANAGER, "Got exception while creating pcap2har upload." +
-						"Failling back to stable pcap2har version.", e);
+						"Falling back to stable pcap2har version.", e);
 				// Send anyway: Better to fall back to the stable pcap2har than to quit.
 			}
 		}
 		pcap2harRequest.setEntity(multipart);
 		executor.execute(new AsyncRequest(pcap2harRequest, 
-				new Pcap2HarResponseListener(activity, harPath), client, new Handler(), null, new File(harPath)));
+				new Pcap2HarResponseListener(activity, harPath, useExperimentalPcap2Har), client, new Handler(), null, new File(harPath)));
 	}
 	
 	public synchronized void responseReceived(HttpRequest request, HttpResponse response, String extraInfo) 

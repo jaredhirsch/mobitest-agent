@@ -516,14 +516,19 @@ public class WebActivity extends Activity {
 	{
 		curProcessedRun++;
 		if (curProcessedRun < result.getRuns().size()) {
-			Run run = result.getRuns().get(curProcessedRun);
-			String harFile = SettingsUtil.getJobBasePath(getBaseContext()) + job.getJobId() + "_" + run.getRunNumber() + "_" + run.getSubRunNumber() + ".har";
-			run.setHarFile(harFile);
-			JobManager.getInstance().asyncPcap2har(this, run.getPcapFile(), harFile);
-		} else {			
+			startPcap2HarUpload(false);  // false -> No request failed yet.
+		} else {
 			setResult(RESULT_OK);
 			finish();
 		}
+	}
+
+	public void startPcap2HarUpload(boolean experimentalPcap2HarFailed)
+	{
+		Run run = result.getRuns().get(curProcessedRun);
+		String harFile = SettingsUtil.getJobBasePath(getBaseContext()) + job.getJobId() + "_" + run.getRunNumber() + "_" + run.getSubRunNumber() + ".har";
+		run.setHarFile(harFile);
+		JobManager.getInstance().asyncPcap2har(this, run.getPcapFile(), harFile, experimentalPcap2HarFailed);
 	}
 
 	private void startMonitoringNetwork() {
