@@ -238,9 +238,18 @@ public final class JobManager implements ResponseListener {
 		HttpPost pcap2harRequest = new HttpPost(url);
 
 		MultipartEntity multipart = new MultipartEntity();
-		multipart.addPart("file", new FileBody(zipPcapFile, "results.pcap.zip", "application/zip"));			
+		multipart.addPart("file", new FileBody(zipPcapFile, "results.pcap.zip", "application/zip"));
+		if (SettingsUtil.getShouldUseExperimentalPcap2har(context)) {
+			try {
+				multipart.addPart("useLatestPCap2Har", new StringBody("1"));
+			}
+			catch (IOException e) {
+				Log.w(BZ_JOB_MANAGER, "Got exception while creating pcap2har upload." +
+						"Failling back to stable pcap2har version.", e);
+				// Send anyway: Better to fall back to the stable pcap2har than to quit.
+			}
+		}
 		pcap2harRequest.setEntity(multipart);
-
 		executor.execute(new AsyncRequest(pcap2harRequest, 
 				new Pcap2HarResponseListener(activity, harPath), client, new Handler(), null, new File(harPath)));
 	}

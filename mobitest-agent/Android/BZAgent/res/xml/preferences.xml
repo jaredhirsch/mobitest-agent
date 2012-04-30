@@ -24,5 +24,6 @@
 <PreferenceCategory android:title="@string/advanced">
 <EditTextPreference android:key="tcpdump_prio" android:title="@string/tcpdump_prio"></EditTextPreference>
 <EditTextPreference android:key="base_path" android:title="@string/base_path"></EditTextPreference>
+<CheckBoxPreference android:key="use_experimental_pcap2har" android:title="@string/use_experimental_pcap2har" android:defaultValue="false"/>
 </PreferenceCategory>
 </PreferenceScreen>

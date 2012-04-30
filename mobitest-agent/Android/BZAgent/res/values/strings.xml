@@ -32,4 +32,5 @@
 <string name="recording_important">Enable Screenshots</string>
 <string name="autopoll_on_start">Start Polling on Launch</string>
 <string name="restart_between_jobs">Restart Between Jobs</string>
+<string name="use_experimental_pcap2har">Test latest pcap2har</string>
 </resources>

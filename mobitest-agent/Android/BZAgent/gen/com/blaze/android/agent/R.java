@@ -74,6 +74,7 @@ public final class R {
         public static final int tcpdump_prio=0x7f060014;
         public static final int timeout=0x7f060012;
         public static final int unique_name=0x7f06000e;
+        public static final int use_experimental_pcap2har=0x7f06001f;
     }
     public static final class xml {
         public static final int preferences=0x7f040000;

@@ -191,4 +191,9 @@ public final class SettingsUtil {
 		}
 		return basePath;
 	}
+
+	public static boolean getShouldUseExperimentalPcap2har(Context context)
+	{
+		return getSharedPreferences(context).getBoolean("use_experimental_pcap2har", false);
+	}
 }
