@@ -11,16 +11,14 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Vector;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Picture;
 import android.net.http.SslError;
 import android.os.Bundle;
-import android.os.Environment;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -79,38 +77,96 @@ public class WebActivity extends Activity {
 	// Indication whether we already captured the current drawing cache
 	private boolean didCaptureCurrentDrawingCache = true;
 	
-	private class FrameCapturer implements Runnable
+	/**
+	 * Class FrameCapturer uses a periodic timer to capture an image of the
+	 * loading web view at a regular interval.  It uses a CountDownTimer,
+	 * which guarantees that the callback that captures the screen is never
+	 * called unless the previous call has already returned.  All callbacks
+	 * run on the thread that calls startRecording.
+	 *
+	 * The implementation of CountDownTimer can be seen here:
+	 * http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/2.3.7_r1/android/os/CountDownTimer.java
+	 *
+	 * @author skerner
+	 *
+	 * TODO(skerner): Before the webview first paints, the contents of the
+	 * previous page load are captured.  Make the webview blank before the
+	 * first paint.
+	 */
+	private class FrameCapturer
 	{
+		private static final long MS_PER_SECOND = 1000;
+		private static final long ONE_HOUR_IN_MS = 60 * 60 * MS_PER_SECOND;
+
 		private WebActivity parentActivity = null;
-		private int curFrameNum = 0;
-		private float period = 0;
+		private long millisPerFrame = 0;
 		private boolean shouldStop = false;
+		private CountDownTimer timer = null;
 		
-		public FrameCapturer(WebActivity parentActivity, float period) {
+		public FrameCapturer(WebActivity parentActivity, long millisPerFrame) {
 			this.parentActivity = parentActivity;
-			this.period = period;
+			this.millisPerFrame = millisPerFrame;
 			this.shouldStop = false;
+			this.timer = null;
 		}
 		
+		public void startRecording() {
+		  assert this.timer == null : "Can't start a running timer.";
+		
+			// The CountDownTimer should fire until we stop it, but it requires
+			// a time limit.  We set the limit to an hour (ONE_HOUR_IN_MS),
+			// which is far longer than any web page should take to load, so
+			// that in practice the timer will keep running until we stop it.
+			this.timer = new CountDownTimer(ONE_HOUR_IN_MS, millisPerFrame) {
+				// CountDownTimer guarantees that onTick() is never called when
+				// a previous call to onTick() has not finished.  This avoids
+				// common threading problems, but it does mean we might drop
+				// frames if onTick() takes longer than the delay between frames.
+				// The webpageTest server can deal with dropped frames.
+				public void onTick(long millisUntilFinished) {
+					long startOfFrameProcessing = System.currentTimeMillis();
+					long millisSinceStart = ONE_HOUR_IN_MS - millisUntilFinished;
+
+					if (shouldStop)
+						return;
+
+					// Video frame files encode the time since loading started in their
+					// file name.  This allows the server to construct a video of the page
+					// loading.  The format is:
+					//   <run-prefix>_progress_<zero-padded-time-from-start>.jpg
+					// The time is represented as number of 100ms intervals elapsed
+					// since the start of the load.  So, we divide the millisSinceStart
+					// by 100ms to get the frame number.
+					int timeFromStartTenthsOfSeconds = (int)(millisSinceStart / 100L);
+
+					//Log.e("BZAgent", String.format("Got frame number %d", timeFromStartTenthsOfSeconds));
+					parentActivity.captureScreen(String.format("frame_%04d", timeFromStartTenthsOfSeconds), false);
+
+					// TODO(skerner): Scale the frames to 1/2 width and height.
+
+					//long msToProcessFrame = (System.currentTimeMillis() - startOfFrameProcessing);
+					//Log.e("BZAgent", String.format("Frame number %d took %d ms to capture.",
+					//      timeFromStartTenthsOfSeconds, msToProcessFrame));
+				}
+
+				@Override
+				public void onFinish() {
+					// There is no way a page load should take ONE_HOUR_IN_MS.  If
+					// onFinish() is called, a bug in the agent must have caused us
+					// to fail to cancel the timer.
+					assert false : "This timer should be stopped when the page loads.";
+				}
+		  };
+		  this.timer.start();
+		}
+
 		public synchronized void stopRecording() {
 			shouldStop = true;
-		}
-		
-		public synchronized void run() {
-			// TODO: Are we creating a thread per screenshot? Can we avoid that?
-			if (!shouldStop) 
-			{
-				// determine the current frame offset in 100ms chunks (what WPT requires)
-				int frameNormNum = (int)(period/100) * (++curFrameNum);
-				//Log.e("BZAgent",String.format("Got frame number %d", frameNormNum));
-				parentActivity.captureScreen(String.format("frame_%04d", frameNormNum), false);
-				if (recordingTimer != null && !shouldStop) {
-					recordingTimer.postDelayed(this, (long) period);
-				}
-			}
+			assert this.timer != null : "Don't stop a timer that was never started.";
+			this.timer.cancel();
+			this.timer = null;
 		}
 	}
-
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -529,9 +585,10 @@ public class WebActivity extends Activity {
 	private void startRecording() {
 		// Now start the timer
 		recordingTimer = new Handler();
-		final float period = (1000.0f / (float) SettingsUtil.getFps(getBaseContext()));
-		frameCapturer = new FrameCapturer(this, period);
-		recordingTimer.postDelayed(frameCapturer, (long) period);
+		final long millisPerVideoFrame =
+		    (long)(1000.0f / (float) SettingsUtil.getFps(getBaseContext()));
+		frameCapturer = new FrameCapturer(this, millisPerVideoFrame);
+		frameCapturer.startRecording();
 	}
 
 	private void stopRecording() 
