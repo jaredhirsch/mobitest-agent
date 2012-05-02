@@ -5,7 +5,6 @@
  */
 package com.blaze.android.agent;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,10 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.List;
-import java.util.Vector;
 import java.util.regex.Pattern;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -504,7 +500,7 @@ public class AgentActivity extends Activity implements JobListener {
 			
 			//Now copy it to the base folder of the run.
 			String docCompletePath = run.getBaseFolder();
-			if (run.getSubRunNumber() == 0) {
+			if (run.isFirstView()) {
 				docCompletePath += run.getRunNumber() + "_screen_doc.jpg";
 			}
 			else {

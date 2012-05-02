@@ -7,9 +7,8 @@ package com.blaze.android.agent.managers;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
@@ -17,28 +16,21 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
-import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.params.ConnManagerParams;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
-import org.apache.http.util.EntityUtils;
 
 import android.content.Context;
 import android.os.Handler;
@@ -47,9 +39,11 @@ import android.util.Log;
 import com.blaze.android.agent.WebActivity;
 import com.blaze.android.agent.model.Job;
 import com.blaze.android.agent.model.Job.JobParseException;
+import com.blaze.android.agent.model.Run;
 import com.blaze.android.agent.requests.AsyncRequest;
 import com.blaze.android.agent.requests.ResponseListener;
 import com.blaze.android.agent.util.SettingsUtil;
+import com.blaze.android.agent.util.WebpageTestPostBuilder;
 import com.blaze.android.agent.util.ZipUtil;
 
 /**
@@ -130,6 +124,28 @@ public final class JobManager implements ResponseListener {
 		currentJobUrlIndex = currentJobUrlIndex % jobUrls.size();
 		return jobUrls.get(currentJobUrlIndex);
 	}
+	
+	private String BuildServerUrlWithPath(String path)
+	{
+		String baseUrl = getCurJobUrl();
+		if (baseUrl.length() == 0)
+			return "";
+
+		StringBuilder urlBuilder = new StringBuilder();
+		
+		// If no protocol is specified, assume http.
+		if (!baseUrl.startsWith("http://") && !baseUrl.startsWith("https://")) {
+		  urlBuilder.append("http://");
+		}
+		
+		urlBuilder.append(baseUrl);
+		
+		if (!baseUrl.endsWith("/"))
+		  urlBuilder.append("/");
+		
+		urlBuilder.append(path);
+		return urlBuilder.toString();
+	}
 
 	/**
 	 * Returns and removes the next job in the queue (at the beginning of the list, FIFO)
@@ -192,23 +208,29 @@ public final class JobManager implements ResponseListener {
 			String url = baseUrl.charAt(baseUrl.length() - 1) == '/' ? baseUrl + pathAndParams : baseUrl + '/' + pathAndParams;
 			
 			Log.i(BZ_JOB_MANAGER, "Publishing: " + url);
+			
+			WebpageTestPostBuilder postBuilder = new WebpageTestPostBuilder();
 			//Executes a request and eventually returns, on this thread (not the new one)
-			HttpPost publishResult = new HttpPost(url);
 			
-			MultipartEntity multipart = new MultipartEntity();
-			multipart.addPart("file", new FileBody(zip, jobId + "-results.zip", "application/zip", "utf-8"));
+			postBuilder.addFileContents("file", jobId + "-results.zip", zip, "application/zip");
 			
+			HttpPost publishResult = null;
 			try {
-				multipart.addPart("done", new StringBody("1"));
-				multipart.addPart("har", new StringBody("1"));
-				multipart.addPart("location", new StringBody(location));
-				multipart.addPart("key", new StringBody(locationKey));
-				multipart.addPart("id", new StringBody(jobId));
-				publishResult.setEntity(multipart);
+				postBuilder.addBooleanParamIfTrue("done", true);
+				postBuilder.addBooleanParamIfTrue("har", true);
+				postBuilder.addStringParam("location", location);
+				postBuilder.addStringParam("key", locationKey);
+				postBuilder.addStringParam("id", jobId);
 			}
-			catch (IOException e) {
-				Log.w(BZ_JOB_MANAGER, "Got exception while creating multipart", e);
+			catch (UnsupportedEncodingException ex) {
+				Log.e(BZ_JOB_MANAGER,
+				      "Got encoding exception while creating multipart. " +
+				      "Because we use a common encoding, this should not happen.", ex);
+				awaitingReq = false;
+				return;
 			}
+			publishResult = postBuilder.BuildPostForUrl(url);
+			
 			awaitingReq = true;
 			executor.execute(new AsyncRequest(publishResult, this, client, new Handler(), zip.getAbsolutePath(), null));
 		}
@@ -220,11 +242,12 @@ public final class JobManager implements ResponseListener {
 
 	public void asyncPcap2har(final WebActivity activity, final String pcapPath, final String harPath, boolean experimentalPcap2HarFailed)
 	{
-		String baseUrl = getCurJobUrl();
 		//Rather than invoking the pcap2har script, we hit a web service
-		String pathAndParams = "mobile/pcap2har.php";
-		String url = baseUrl.charAt(baseUrl.length() - 1) == '/' ? baseUrl + pathAndParams : baseUrl + '/' + pathAndParams;
-
+		String url = BuildServerUrlWithPath("mobile/pcap2har.php");
+		if (url == "") {
+			Log.e(BZ_JOB_MANAGER, "Can't upload work.  No server url.  Set one in 'settings'");
+			return;
+		}
 		// Zip up the pcapPath.  If |experimentalPcap2HarFailed|, then the zip file
 		// is already present from the first try.
 		File zipPcapFile = new File(pcapPath + ".zip");
@@ -236,27 +259,30 @@ public final class JobManager implements ResponseListener {
 			return;
 		}
 		
-		Log.i(BZ_JOB_MANAGER, "Preparing a POST request for pcap2har (" + url + ")");
-		HttpPost pcap2harRequest = new HttpPost(url);
+		// Rather than invoking the pcap2har script, we hit a web service.
+		WebpageTestPostBuilder pcapPostBuilder = new WebpageTestPostBuilder();
 
-		MultipartEntity multipart = new MultipartEntity();
-		multipart.addPart("file", new FileBody(zipPcapFile, "results.pcap.zip", "application/zip"));
 		boolean useExperimentalPcap2Har = false;
 		if (!experimentalPcap2HarFailed &&
 		    SettingsUtil.getShouldUseExperimentalPcap2har(context)) {
 			try {
-				multipart.addPart("useLatestPCap2Har", new StringBody("1"));
+				pcapPostBuilder.addBooleanParamIfTrue("useLatestPCap2Har", true);
 				useExperimentalPcap2Har = true;
 			}
-			catch (IOException e) {
-				Log.w(BZ_JOB_MANAGER, "Got exception while creating pcap2har upload." +
-						"Falling back to stable pcap2har version.", e);
+			catch (UnsupportedEncodingException ex) {
+				Log.w(BZ_JOB_MANAGER,
+				      "Got exception while creating pcap2har upload." +
+				      "Falling back to stable pcap2har version.", ex);
 				// Send anyway: Better to fall back to the stable pcap2har than to quit.
 			}
 		}
-		pcap2harRequest.setEntity(multipart);
-		executor.execute(new AsyncRequest(pcap2harRequest, 
-				new Pcap2HarResponseListener(activity, harPath, useExperimentalPcap2Har), client, new Handler(), null, new File(harPath)));
+		
+		pcapPostBuilder.addFileContents("file", "results.pcap.zip", zipPcapFile, "application/zip");
+		Log.i(BZ_JOB_MANAGER, "Preparing a POST request for pcap2har (" + url + ")");
+		HttpPost pcap2harRequest = pcapPostBuilder.BuildPostForUrl(url);
+		
+		Pcap2HarResponseListener responseListner = new Pcap2HarResponseListener(activity, harPath, useExperimentalPcap2Har);
+		executor.execute(new AsyncRequest(pcap2harRequest, responseListner, client, new Handler(), null, new File(harPath)));
 	}
 	
 	public synchronized void responseReceived(HttpRequest request, HttpResponse response, String extraInfo) 

@@ -74,8 +74,15 @@ public class Run {
 		return runNumber;
 	}
 
+	// TODO(skerner): Is subRunNumber ever not 0 or 1?  Consider replacing
+	// with boolean isFirstView, for consistency with server and windows agent
+	// code.
 	public int getSubRunNumber() {
 		return subRunNumber;
+	}
+
+	public boolean isFirstView() {
+	  return subRunNumber == 0;
 	}
 
 	public String getHarFile() {

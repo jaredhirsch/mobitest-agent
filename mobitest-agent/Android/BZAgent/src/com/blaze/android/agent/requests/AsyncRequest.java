@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.UnknownHostException;
 
 import org.apache.http.HttpResponse;
@@ -21,10 +20,8 @@ import org.apache.http.client.methods.HttpUriRequest;
 import com.blaze.android.agent.AgentActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
-import android.provider.Settings;
 import android.util.Log;
 
 /**

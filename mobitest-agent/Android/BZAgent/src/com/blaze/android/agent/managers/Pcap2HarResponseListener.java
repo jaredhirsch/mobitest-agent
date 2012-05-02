@@ -1,16 +1,7 @@
 package com.blaze.android.agent.managers;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.FileBody;
 
 import android.util.Log;
 
@@ -24,7 +15,6 @@ public class Pcap2HarResponseListener implements ResponseListener
 	private WebActivity activity = null;
 	private String harPath = null;
 	private boolean requestIsUsingExperimentalPcap2Har = false;
-	private static boolean foo = false;
 
 	public Pcap2HarResponseListener(WebActivity activity, String harPath, boolean requestIsUsingExperimentalPcap2Har)
 	{
@@ -67,5 +57,4 @@ public class Pcap2HarResponseListener implements ResponseListener
 			activity.processNextRunResult();
 		}
 	}
-
 }
