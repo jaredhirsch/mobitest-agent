@@ -59,6 +59,7 @@ public final class R {
         public static final int net_interface=0x7f060013;
         public static final int poll_now=0x7f060007;
         public static final int polling_frequency=0x7f060015;
+        public static final int process_hars_on_server=0x7f060020;
         public static final int recording_important=0x7f06001c;
         public static final int recording_settings=0x7f06000c;
         public static final int restart_between_jobs=0x7f06001e;

@@ -2,7 +2,6 @@ package com.blaze.android.agent.util;
 
 import java.util.Vector;
 
-import com.blaze.android.agent.AgentActivity;
 import com.blaze.android.agent.Constants;
 
 import android.content.Context;
@@ -195,5 +194,10 @@ public final class SettingsUtil {
 	public static boolean getShouldUseExperimentalPcap2har(Context context)
 	{
 		return getSharedPreferences(context).getBoolean("use_experimental_pcap2har", false);
+	}
+	
+	public static boolean getShouldProcessHarsOnServer(Context context)
+	{
+		return getSharedPreferences(context).getBoolean("process_hars_on_server", false);
 	}
 }

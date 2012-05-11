@@ -374,25 +374,20 @@ public class AgentActivity extends Activity implements JobListener {
 		Log.i(BZ_AGENT, "Packaging up results for job: " + currentJob.getJobId());
 		
 		new Thread(new Runnable() {
-			public void run() {
+			private void WriteHarToFile(File harFile) {
 				//The first step is to write the results.har
 				JSONObject result = currentJob.getResult().getJsonRepresentation();
-				File file = new File(SettingsUtil.getJobBasePath(getBaseContext()) + "results.har");
+				
 				BufferedWriter writer = null;
 				try {
-					if (file.createNewFile()) {
-						writer = new BufferedWriter(new FileWriter(file));
+					if (harFile.createNewFile()) {
+						writer = new BufferedWriter(new FileWriter(harFile));
 						//Unfortunately we can't simply call 'result.toString()'; we need to write this efficiently.
-						//writer.write(result.toString());
+						  //writer.write(result.toString());
 						JSONUtil.writeJSONObject(writer, result);
 					}
 					else {
 						Log.e(BZ_AGENT, "Could not create results.har");
-					}
-					
-					//Now that we have the JSON, we need to get the proper screenshots
-					for (Run run : currentJob.getResult().getRuns()) {
-						saveDocumentCompleteScreenshot(run);
 					}
 				}
 				catch (JSONException e) {
@@ -416,6 +411,20 @@ public class AgentActivity extends Activity implements JobListener {
 							writer = null;
 						}
 					}
+				}
+			}
+			
+			public void run() {
+				// If we are doing HAR creation locally, the first step is to write
+				// the results.har file.
+				if (!SettingsUtil.getShouldProcessHarsOnServer(getBaseContext())) {
+					File harFile = new File(SettingsUtil.getJobBasePath(getBaseContext()) + "results.har");
+					WriteHarToFile(harFile);
+				}
+				
+				//Now that we have the JSON, we need to get the proper screenshots
+				for (Run run : currentJob.getResult().getRuns()) {
+					saveDocumentCompleteScreenshot(run);
 				}
 				
 				//Now create the avisynth files
@@ -470,7 +479,8 @@ public class AgentActivity extends Activity implements JobListener {
 	}
 
 	/**
-	 * Fetch the 'doc complete' image from the pile of screenshots that we took while recording the video.
+	 * Fetch the 'doc complete' image from the pile of screenshots that we took
+	 * while recording the video.
 	 * 
 	 * This will simply not do anything if 
 	 * @param run

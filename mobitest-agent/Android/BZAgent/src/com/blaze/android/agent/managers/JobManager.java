@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -182,12 +183,9 @@ public final class JobManager implements ResponseListener {
 		{
 			// Advance the URL we're polling
 			advanceJobUrl();
-			String baseUrl = getCurJobUrl();
-			if (baseUrl != null && baseUrl.length() > 0) 
+			String url = BuildServerUrlWithPath("work/getwork.php?recover=1&location=" + location + "&key=" + locationKey + "&pc=" + uniqueName);
+			if (url != null && url.length() > 0)
 			{
-				String pathAndParams = "work/getwork.php?recover=1&location=" + location + "&key=" + locationKey + "&pc=" + uniqueName;
-				String url = baseUrl.charAt(baseUrl.length() - 1) == '/' ? baseUrl + pathAndParams : baseUrl + '/' + pathAndParams;
-	
 				Log.i(BZ_JOB_MANAGER, "Polling: " + url);
 	
 				// Executes a request and eventually returns, on this thread (not the new one)
@@ -202,22 +200,21 @@ public final class JobManager implements ResponseListener {
 
 	public synchronized void publishResults(String jobId, String location, String locationKey, File zip) 
 	{
-		String baseUrl = getCurJobUrl();
-		if (!awaitingReq && baseUrl != null && baseUrl.length() > 0) {
-			String pathAndParams = "work/workdone.php";/*?har=1&done=1&location=" + location + "&key=" + locationKey + "&id=" + jobId;*/
-			String url = baseUrl.charAt(baseUrl.length() - 1) == '/' ? baseUrl + pathAndParams : baseUrl + '/' + pathAndParams;
-			
+		String url = BuildServerUrlWithPath("work/workdone.php");
+		if (!awaitingReq && url != null && url.length() > 0) {
 			Log.i(BZ_JOB_MANAGER, "Publishing: " + url);
 			
 			WebpageTestPostBuilder postBuilder = new WebpageTestPostBuilder();
-			//Executes a request and eventually returns, on this thread (not the new one)
 			
-			postBuilder.addFileContents("file", jobId + "-results.zip", zip, "application/zip");
-			
+			// If har processing is done on the server, then we did not create one,
+			// and are not uploading one. If it is done locally, the har will be in
+			// zip file we are uploading.
+			boolean uploadingHar = !SettingsUtil.getShouldProcessHarsOnServer(context);
 			HttpPost publishResult = null;
 			try {
+				postBuilder.addFileContents("file", jobId + "-results.zip", zip, "application/zip");
 				postBuilder.addBooleanParamIfTrue("done", true);
-				postBuilder.addBooleanParamIfTrue("har", true);
+				postBuilder.addBooleanParamIfTrue("har", uploadingHar);
 				postBuilder.addStringParam("location", location);
 				postBuilder.addStringParam("key", locationKey);
 				postBuilder.addStringParam("id", jobId);
@@ -231,6 +228,7 @@ public final class JobManager implements ResponseListener {
 			}
 			publishResult = postBuilder.BuildPostForUrl(url);
 			
+			//Executes a request and eventually returns, on this thread (not the new one)
 			awaitingReq = true;
 			executor.execute(new AsyncRequest(publishResult, this, client, new Handler(), zip.getAbsolutePath(), null));
 		}
@@ -240,19 +238,23 @@ public final class JobManager implements ResponseListener {
 		return client;
 	}
 
-	public void asyncPcap2har(final WebActivity activity, final String pcapPath, final String harPath, boolean experimentalPcap2HarFailed)
+	public void asyncPcap2har(final WebActivity activity, final Job job, final Run run, String location, String locationKey, boolean experimentalPcap2HarFailed)
 	{
-		//Rather than invoking the pcap2har script, we hit a web service
-		String url = BuildServerUrlWithPath("mobile/pcap2har.php");
-		if (url == "") {
+		// Rather than invoking the pcap2har script, we hit a web service.
+		boolean shouldProcessHarsOnServer = SettingsUtil.getShouldProcessHarsOnServer(context);
+		String urlPath = (shouldProcessHarsOnServer ? "work/workdone.php" : "mobile/pcap2har.php");
+		String url = BuildServerUrlWithPath(urlPath);
+		if (url == "")
+		{
 			Log.e(BZ_JOB_MANAGER, "Can't upload work.  No server url.  Set one in 'settings'");
+			activity.processNextRunResult();
 			return;
 		}
 		// Zip up the pcapPath.  If |experimentalPcap2HarFailed|, then the zip file
 		// is already present from the first try.
-		File zipPcapFile = new File(pcapPath + ".zip");
+		File zipPcapFile = new File(run.getPcapFile() + ".zip");
 		if (!experimentalPcap2HarFailed &&
-		    !ZipUtil.zipFile(zipPcapFile, pcapPath, zipPcapFile.getParent(), null))
+		    !ZipUtil.zipFile(zipPcapFile, run.getPcapFile(), zipPcapFile.getParent(), null))
 		{
 			Log.e(BZ_JOB_MANAGER, "Failed to zip up pcap file to path " + zipPcapFile.getAbsolutePath());
 			activity.processNextRunResult();
@@ -261,7 +263,28 @@ public final class JobManager implements ResponseListener {
 		
 		// Rather than invoking the pcap2har script, we hit a web service.
 		WebpageTestPostBuilder pcapPostBuilder = new WebpageTestPostBuilder();
-
+		Map<String, Long> pageTimings = run.GetEventTimes();
+		try {
+			pcapPostBuilder.addStringParam("location", location);
+			pcapPostBuilder.addStringParam("key", locationKey);
+			pcapPostBuilder.addStringParam("id", job.getJobId());
+			pcapPostBuilder.addBooleanParamIfTrue("pcap", true);
+			pcapPostBuilder.addIntegerParam("_runNumber", run.getRunNumber());
+			pcapPostBuilder.addBooleanParamAlways("_cacheWarmed", !run.isFirstView());
+			
+			for (Map.Entry<String, Long> entry : pageTimings.entrySet()) {
+				// 2^31 milliseconds = 24.85 days, so integer timestamps are fine.
+				int duration = entry.getValue().intValue();
+				pcapPostBuilder.addIntegerParam(entry.getKey(), duration);
+			}
+			pcapPostBuilder.addStringParam("_urlUnderTest", job.getUrl());
+			// Do not set "done".  Screen shot and video frame upload will do that.
+		}
+		catch (UnsupportedEncodingException ex) {
+			Log.e(BZ_JOB_MANAGER,
+			      "Got encoding exception while creating pcap2har upload." +
+			      "We use utf8, so this shoudl not happen.", ex);
+		}
 		boolean useExperimentalPcap2Har = false;
 		if (!experimentalPcap2HarFailed &&
 		    SettingsUtil.getShouldUseExperimentalPcap2har(context)) {
@@ -281,8 +304,8 @@ public final class JobManager implements ResponseListener {
 		Log.i(BZ_JOB_MANAGER, "Preparing a POST request for pcap2har (" + url + ")");
 		HttpPost pcap2harRequest = pcapPostBuilder.BuildPostForUrl(url);
 		
-		Pcap2HarResponseListener responseListner = new Pcap2HarResponseListener(activity, harPath, useExperimentalPcap2Har);
-		executor.execute(new AsyncRequest(pcap2harRequest, responseListner, client, new Handler(), null, new File(harPath)));
+		Pcap2HarResponseListener responseListner = new Pcap2HarResponseListener(activity, run.getHarFile(), useExperimentalPcap2Har);
+		executor.execute(new AsyncRequest(pcap2harRequest, responseListner, client, new Handler(), null, new File(run.getHarFile())));
 	}
 	
 	public synchronized void responseReceived(HttpRequest request, HttpResponse response, String extraInfo) 

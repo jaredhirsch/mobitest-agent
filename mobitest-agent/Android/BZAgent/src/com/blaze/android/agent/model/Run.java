@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +28,8 @@ import android.util.Log;
  * @author Joshua Tessier
  */
 public class Run {
+	private static long UNSET_TIMESTAMP = -1;
+	
 	private String identifier;
 	private String pcapFile;
 	private String harFile;
@@ -36,10 +39,10 @@ public class Run {
 	private int runNumber;
 	private int subRunNumber;
 	
-	private long fullyLoaded;
-	private long docComplete;
-	private long startRender;
-	private long start;
+	private long fullyLoaded = UNSET_TIMESTAMP;
+	private long docComplete = UNSET_TIMESTAMP;
+	private long startRender = UNSET_TIMESTAMP;
+	private long start = UNSET_TIMESTAMP;
 	
 	public class ScreenshotInfo
 	{
@@ -65,7 +68,7 @@ public class Run {
 		this.screenshotPaths = new ArrayList<ScreenshotInfo>(32); 
 		this.resources = new HashMap<String, Date>(32);
 	}
-	
+
 	public String getIdentifier() {
 		return identifier;
 	}
@@ -118,11 +121,40 @@ public class Run {
 	}
 
 	public long getFullyLoaded() {
-		return fullyLoaded;
+		return this.fullyLoaded;
 	}
 
 	public void setFullyLoaded(long fullyLoaded) {
 		this.fullyLoaded = fullyLoaded;
+	}
+	
+	/**
+	 * Build a map from event name (as expressed in a .har file) to the
+	 * number of milliseconds from the start of the page load to the event.
+	 * As in a .har file, unknown values are set to -1.
+	 */
+	public Map<String,Long> GetEventTimes() {
+		Map<String, Long> timings = new TreeMap<String, Long>();
+
+		long onContentLoaded = -1;
+		if (this.start != UNSET_TIMESTAMP &&
+		    this.docComplete != UNSET_TIMESTAMP) {
+			onContentLoaded = this.docComplete - this.start;
+			assert onContentLoaded >= 0 : "If timings are set, events happen after starting.";
+		}
+		timings.put("onContentLoad", onContentLoaded);
+
+		long onRender = -1;
+		if (this.start != UNSET_TIMESTAMP &&
+		    this.startRender != UNSET_TIMESTAMP) {
+		  onRender = this.startRender - this.start;
+		  assert onRender >= 0 : "If timings are set, events happen after starting.";
+		}
+		timings.put("_onRender", onRender);
+
+		// TODO(skerner): Add "onLoad".
+		timings.put("onLoad", (long)-1);
+		return timings;
 	}
 
 	public long getDocComplete() {

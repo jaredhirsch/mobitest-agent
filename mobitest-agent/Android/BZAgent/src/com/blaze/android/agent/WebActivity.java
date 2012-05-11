@@ -124,7 +124,7 @@ public class WebActivity extends Activity {
 				// frames if onTick() takes longer than the delay between frames.
 				// The webpageTest server can deal with dropped frames.
 				public void onTick(long millisUntilFinished) {
-					long startOfFrameProcessing = System.currentTimeMillis();
+					//long startOfFrameProcessing = System.currentTimeMillis();
 					long millisSinceStart = ONE_HOUR_IN_MS - millisUntilFinished;
 
 					if (shouldStop)
@@ -528,7 +528,11 @@ public class WebActivity extends Activity {
 		Run run = result.getRuns().get(curProcessedRun);
 		String harFile = SettingsUtil.getJobBasePath(getBaseContext()) + job.getJobId() + "_" + run.getRunNumber() + "_" + run.getSubRunNumber() + ".har";
 		run.setHarFile(harFile);
-		JobManager.getInstance().asyncPcap2har(this, run.getPcapFile(), harFile, experimentalPcap2HarFailed);
+		
+		String location = SettingsUtil.getLocation(getBaseContext());
+		String locationKey = SettingsUtil.getLocationKey(getBaseContext());
+		JobManager.getInstance().asyncPcap2har(
+			this, this.job, run, location, locationKey, experimentalPcap2HarFailed);
 	}
 
 	private void startMonitoringNetwork() {
