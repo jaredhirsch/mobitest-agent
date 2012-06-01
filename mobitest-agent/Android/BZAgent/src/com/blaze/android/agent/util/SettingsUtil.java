@@ -7,11 +7,16 @@ import com.blaze.android.agent.Constants;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.provider.Settings.Secure;
 import android.util.Log;
 
 public final class SettingsUtil {
 	private SettingsUtil () {}
 	
+	// A unique id for the device.  Used if the user does not set a unique ID
+	// in the preferences.
+	private static String sDeviceId = null;
+
 	/**
 	 * Returns the shared preference bundle
 	 */
@@ -113,7 +118,21 @@ public final class SettingsUtil {
 	 * @return
 	 */
 	public static String getUniqueName(Context context) {
-		return getSharedPreferences(context).getString("unique_name",  getLocation(context));
+		String uniqueName = getSharedPreferences(context).getString("unique_name",  "");
+		if (uniqueName != null && uniqueName != "")
+			return uniqueName;
+		
+		// When devices do not have unique IDs, bad things happen.  For example,
+		// suppose phones A and B set ?recover=1 when getting work.  A gets a job,
+		// and starts running.  B gets work, and because it has the same id as A
+		// and is not done, the server will give B the same job as A.  To avoid
+		// this issue when the user fails to set a preference, we return an id that
+		// is unique to the phone if no ID is set.  This ID changes on OS
+		// reinstall/factory reset.
+		if (sDeviceId == null) {
+			sDeviceId = "DeviceId_" + Secure.getString(context.getContentResolver(), Secure.ANDROID_ID);
+		}
+		return sDeviceId;
 	}
 
 	
