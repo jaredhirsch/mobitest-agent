@@ -1,11 +1,13 @@
 package com.blaze.android.agent.util;
 
+import java.io.IOException;
 import java.util.Vector;
 
 import com.blaze.android.agent.Constants;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.Settings.Secure;
 import android.util.Log;
@@ -201,9 +203,14 @@ public final class SettingsUtil {
 		return getBasePath(context);
 	}
 
-	public static String getBasePath(Context context) 
+	public static String getBasePath(Context context)
 	{
-		String basePath = getSharedPreferences(context).getString("base_path", Constants.BASE_PATH);
+		String basePath = getSharedPreferences(context).getString("base_path", null);
+		
+		if (basePath == null) {
+		  basePath = Environment.getExternalStorageDirectory().getPath();
+		}
+		
 		if (!basePath.endsWith("/")) {
 			basePath += "/";
 		}
