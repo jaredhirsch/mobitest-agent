@@ -28,9 +28,9 @@
     <string name="job_url4">Job URL 4</string>
     <string name="base_path">Base Path</string>
     <string name="advanced">Advanced</string>
-    
-<string name="recording_important">Enable Screenshots</string>
-<string name="autopoll_on_start">Start Polling on Launch</string>
-<string name="restart_between_jobs">Restart Between Jobs</string>
-<string name="use_experimental_pcap2har">Test latest pcap2har</string><string name="process_hars_on_server">Process HARs on server</string>
+    <string name="recording_important">Enable Screenshots</string>
+    <string name="autopoll_on_start">Start Polling on Launch</string>
+    <string name="restart_between_jobs">Restart Between Jobs</string>
+    <string name="use_experimental_pcap2har">Test latest pcap2har</string>
+    <string name="process_hars_on_server">Process HARs on server</string>
 </resources>

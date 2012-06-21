@@ -9,6 +9,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Vector;
 
+import com.blaze.android.agent.Constants;
+
 import android.util.Log;
 
 /**
@@ -113,21 +115,24 @@ public final class ProcessManager {
 			Log.e(PROCESS_MANAGER, "Root access denied");
 		}
 	}
-
+	
 	public void startNetworkMonitor(String path, String tcpdumpInterface, String prio) {
+		StringBuilder tcpdumpCommandBuilder = new StringBuilder();
+		tcpdumpCommandBuilder.append(Constants.CAPTURE_TCPDUMP).append(" -v -p -n ");
+		if (tcpdumpInterface == null || tcpdumpInterface.length() == 0) {
+			Log.i(PROCESS_MANAGER, "TCPDUMP: No network interface specified.");
+		} else {
+			tcpdumpCommandBuilder.append(" -i ").append(tcpdumpInterface);
+		}
+		tcpdumpCommandBuilder.append(" -s 0 -w ").append(path).append("\n");
+		String tcpdumpCommand = tcpdumpCommandBuilder.toString();
+		Log.i(PROCESS_MANAGER, "tcpdump cmd: "+ tcpdumpCommand);
+
 		try {
 			Log.i(PROCESS_MANAGER, "Starting TCPDUMP");
 			tcpDumpProcess = Runtime.getRuntime().exec("su");
 			tcpDumpOutputStream = new DataOutputStream(tcpDumpProcess.getOutputStream());
-			if (tcpdumpInterface == null || tcpdumpInterface.length() == 0) {
-				Log.i(PROCESS_MANAGER, "TCPDUMP: No network interface specified (tcpdump -v -s 0 -w " + path + "\n" + ")");
-				tcpDumpOutputStream.writeBytes("tcpdump -v -p -n -s 0 -w " + path + "\n");
-			}
-			else {
-				Log.i(PROCESS_MANAGER, "TCPDUMP: " + tcpdumpInterface + " interface specified (tcpdump -v -i " + tcpdumpInterface + " -s 0 -w " + path + "\n" + ")");
-				tcpDumpOutputStream.writeBytes("tcpdump -v -p -n -i " + tcpdumpInterface + " -s 0 -w " + path + "\n");
-			}
-			Log.i(PROCESS_MANAGER, "Starting to tcpdump: " + path);
+			tcpDumpOutputStream.writeBytes(tcpdumpCommand);
 		}
 		catch (IOException e) {
 			Log.e(PROCESS_MANAGER, "Failed to start tcpdump", e);
@@ -149,7 +154,7 @@ public final class ProcessManager {
 			Log.e(PROCESS_MANAGER, "Failed to close");
 		}
 
-		// Now kill off any errant tcpdump process...i.
+		// Now kill off any errant tcpdump process...
 		// TODO: Find a better way to do this
 		try {
 			Process killAll = Runtime.getRuntime().exec("su");
