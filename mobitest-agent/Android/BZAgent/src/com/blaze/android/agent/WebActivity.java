@@ -102,12 +102,41 @@ public class WebActivity extends Activity {
 		private long millisPerFrame = 0;
 		private boolean shouldStop = false;
 		private CountDownTimer timer = null;
+
+		// A format string used to generate the file name of the video frame to
+		// upload.
+		private String fileNameFormatString;
 		
-		public FrameCapturer(WebActivity parentActivity, long millisPerFrame) {
+		public FrameCapturer(WebActivity parentActivity, long millisPerFrame, Run currentRun) {
 			this.parentActivity = parentActivity;
 			this.millisPerFrame = millisPerFrame;
 			this.shouldStop = false;
 			this.timer = null;
+
+			// Frames encode the run and time of capture in their name.  Build a
+			// format string that will be used to generate the name of each frame.
+			StringBuilder fileNameFormatBuilder = new StringBuilder();
+			fileNameFormatBuilder.append(currentRun.getRunNumber());
+			fileNameFormatBuilder.append("_");
+			
+			if (!currentRun.isFirstView())
+			  fileNameFormatBuilder.append("Cached_");
+			
+			fileNameFormatBuilder.append("progress_%04d");
+			
+			this.fileNameFormatString = fileNameFormatBuilder.toString();
+		}
+		
+		private String FileNameForFrame(long millisSinceStart) {
+			// Video frame files encode the time since loading started in their
+			// file name.  This allows the server to construct a video of the page
+			// loading.  The format is:
+			//   <run-prefix>_progress_<zero-padded-time-from-start>.jpg
+			// The time is represented as number of 100ms intervals elapsed
+			// since the start of the load.  So, we divide the millisSinceStart
+			// by 100ms to get the frame number.
+			int timeFromStartTenthsOfSeconds = (int)(millisSinceStart / 100L);
+			return String.format(this.fileNameFormatString, timeFromStartTenthsOfSeconds);
 		}
 		
 		public void startRecording() {
@@ -130,17 +159,9 @@ public class WebActivity extends Activity {
 					if (shouldStop)
 						return;
 
-					// Video frame files encode the time since loading started in their
-					// file name.  This allows the server to construct a video of the page
-					// loading.  The format is:
-					//   <run-prefix>_progress_<zero-padded-time-from-start>.jpg
-					// The time is represented as number of 100ms intervals elapsed
-					// since the start of the load.  So, we divide the millisSinceStart
-					// by 100ms to get the frame number.
-					int timeFromStartTenthsOfSeconds = (int)(millisSinceStart / 100L);
-
 					//Log.e("BZAgent", String.format("Got frame number %d", timeFromStartTenthsOfSeconds));
-					parentActivity.captureScreen(String.format("frame_%04d", timeFromStartTenthsOfSeconds), false);
+
+					parentActivity.captureScreen(FileNameForFrame(millisSinceStart), false);
 
 					// TODO(skerner): Scale the frames to 1/2 width and height.
 
@@ -596,7 +617,7 @@ public class WebActivity extends Activity {
 		recordingTimer = new Handler();
 		final long millisPerVideoFrame =
 		    (long)(1000.0f / (float) SettingsUtil.getFps(getBaseContext()));
-		frameCapturer = new FrameCapturer(this, millisPerVideoFrame);
+		frameCapturer = new FrameCapturer(this, millisPerVideoFrame, this.result.getCurrentRun());
 		frameCapturer.startRecording();
 	}
 
