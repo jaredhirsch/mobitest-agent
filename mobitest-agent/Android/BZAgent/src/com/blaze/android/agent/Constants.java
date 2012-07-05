@@ -36,4 +36,5 @@ public final class Constants {
 	public static final String LOGIN = "login";
 	public static final String PASSWORD = "password";
 	public static final String CAPTURE_TCPDUMP = "tcpdump";
+	public static final long UNSET_TIMESTAMP = -1L;
 }

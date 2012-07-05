@@ -71,7 +71,7 @@ public class WebActivity extends Activity {
 	private FrameCapturer frameCapturer = null;
 
 	// Run-specific state
-	private boolean startRender;
+	private boolean startRenderSeen;
 	private boolean shouldCaptureImportantScreens;
 
 	// Indication whether we already captured the current drawing cache
@@ -388,8 +388,8 @@ public class WebActivity extends Activity {
 			Log.i(BZ_WEB_ACTIVITY, "***** STARTING RUN *****");
 		}
 
-		// Reset runspecific data
-		startRender = false;
+		// Reset run-specific data
+		startRenderSeen = false;
 		didCaptureCurrentDrawingCache  = true;
 		startLoading();
 	}
@@ -573,13 +573,21 @@ public class WebActivity extends Activity {
 	{
 		didCaptureCurrentDrawingCache = true;
 		
+		// If we need the time of the bitmap we are capturing, get the time before
+		// doing anything that could be slow.  Users of |now| should assert that it
+		// is not UNSET_TIMESTAMP.
+		long currentTimestamp = Constants.UNSET_TIMESTAMP;
+		if (!important) {
+			currentTimestamp = System.currentTimeMillis();
+		}
+		
 		// If we didn't refresh the drawing cache since the last "onNewPicture" call, do so now.
 		Bitmap screenshot = view.getDrawingCache();
 		FileOutputStream fos = null;
 		try {
-
 			if (screenshot != null) { // The drawing cache may not always be populated.
-				String basePath = important ? result.getCurrentRun().getBaseFolder() : result.getCurrentRun().getVideoFolder();
+				String basePath = important ? result.getCurrentRun().getBaseFolder()
+				                            : result.getCurrentRun().getVideoFolder();
 				// TODO: Add setting to swap between jpg and png
 				String fullPath = basePath + fileName + ".jpg";
 				fos = new FileOutputStream(fullPath);
@@ -587,7 +595,8 @@ public class WebActivity extends Activity {
 				fos.flush();
 
 				if (!important) {
-					result.getCurrentRun().addScreenshotPath(fullPath, (new Date()).getTime());
+					assert currentTimestamp != Constants.UNSET_TIMESTAMP : "Did not get time.";
+					result.getCurrentRun().addScreenshotPath(fullPath, currentTimestamp);
 				}
 			}
 			else {
@@ -732,6 +741,19 @@ public class WebActivity extends Activity {
 	private class AgentPictureListener implements PictureListener {
 		public void onNewPicture(WebView webView, Picture picture) 
 		{
+			boolean isOnRenderPicture = false;  // Set to true if this is the first picture of the run.
+			long currentTimestamp = Constants.UNSET_TIMESTAMP;
+			// Do not record the onRender time of pre-cache runs.  During the pre-cache
+			// run, getCurrentRun() returns the previous run, so setting render time
+			// would overwrite the onrender time of the last run.
+			if (!preCacheRun && !startRenderSeen) {
+				startRenderSeen = true;
+				// Get the time before doing anything slow, like altering the drawing
+				// cache of the view.
+				currentTimestamp = System.currentTimeMillis();
+				isOnRenderPicture = true;
+			}
+
 			if (view != null) {
 				//Keep the drawing cache up to date for video
 				Log.i(BZ_WEB_ACTIVITY, "**** NEW PICTURE ****");
@@ -788,13 +810,11 @@ public class WebActivity extends Activity {
 			// if (!cleared) {
 			// cleared = true;
 			// } else
-			if (!startRender) {
-				startRender = true;
-
+			if (isOnRenderPicture) {
 				Log.i(BZ_WEB_ACTIVITY, "**** START RENDER ****");
-
-				// Set the time!
-				result.getCurrentRun().setStartRender((new Date()).getTime());
+				// Set the onRender time to the time this function was called.
+				assert currentTimestamp != Constants.UNSET_TIMESTAMP : "Failed to save the time for onRender.";
+				result.getCurrentRun().setStartRender(currentTimestamp);
 
 				if (shouldCaptureImportantScreens) {
 					// Now take a picture!
@@ -810,7 +830,7 @@ public class WebActivity extends Activity {
 	}
 
 	/**
-	 * Client used to surpress any javascript alerts
+	 * Client used to suppress any javascript alerts
 	 * 
 	 * @author Joshua Tessier
 	 */
