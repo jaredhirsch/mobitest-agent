@@ -67,7 +67,6 @@ extern "C" CGImageRef UIGetScreenImage();
 	if (self) {
 		job = [aJob retain];
 		timeout = timeoutValue;
-		currentFrame = 0;
 		currentRun = 0;
 		currentSubRun = 0;
 		
@@ -93,6 +92,9 @@ extern "C" CGImageRef UIGetScreenImage();
 	[timeoutTimer release];
 	timeoutTimer = nil;
 	
+	[recordingTimerStarted release];
+	recordingTimerStarted = nil;
+    
 	[recordingTimer invalidate];
 	[recordingTimer release];
 	recordingTimer = nil;
@@ -188,8 +190,7 @@ extern "C" CGImageRef UIGetScreenImage();
 	result = [[BZResult alloc] init];
 	result.jobId = job.testId;
 	currentRun = 0;
-	currentFrame = 0;
-	
+
 	//Now get started
 	[self startSession];
 }
@@ -211,7 +212,6 @@ extern "C" CGImageRef UIGetScreenImage();
 		webView.result = result;
 		
 		currentSubRun = 0;
-        currentFrame = 0;
 	}
 	else if (currentRun == 0) {
 		[self clearCache];
@@ -287,7 +287,9 @@ extern "C" CGImageRef UIGetScreenImage();
 	[self pauseRecording];
 	
 	if (!preCache) {
-        [self captureScreen:[NSString stringWithFormat:@"%d_%@screen.jpg", currentRun, currentSubRun == 1 ? @"Cached_" : @"", nil] important:YES];
+        NSString *cacheString = (currentSubRun == 1 ? @"Cached_" : @"");
+        NSString *identifier = [NSString stringWithFormat:@"%d_%@screen.jpg", currentRun, cacheString, nil];
+        [self captureScreen:identifier important:YES];
         //int length = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML.length"] integerValue];
         //[result setContentLength:length];
 
@@ -452,13 +454,24 @@ extern "C" CGImageRef UIGetScreenImage();
 			[recordingTimer invalidate];
 			[recordingTimer release];
 			recordingTimer = nil;
+
+			[recordingTimerStarted release];
+			recordingTimerStarted = nil;
 		}
         
         // Call the first capture screen, to get the blank screen
         [self performSelector:@selector(captureScreen) withObject:Nil afterDelay:0.1f];
 
-		CGFloat framesPerSecond = 1.0f / [[[NSUserDefaults standardUserDefaults] objectForKey:kBZFPSSettingsKey] floatValue];
-		recordingTimer = [[NSTimer scheduledTimerWithTimeInterval:framesPerSecond target:self selector:@selector(captureScreen) userInfo:nil repeats:YES] retain];
+		CGFloat secondsPerFrame = 1.0f / [[[NSUserDefaults standardUserDefaults] objectForKey:kBZFPSSettingsKey] floatValue];
+
+		// Remember when we start the timer, so that we can compute the timestamp on
+		// each video frame.
+		recordingTimerStarted = [[NSDate alloc] init];
+		recordingTimer = [[NSTimer scheduledTimerWithTimeInterval:secondsPerFrame
+		                                                   target:self
+		                                                 selector:@selector(captureScreen)
+		                                                 userInfo:nil
+		                                                  repeats:YES] retain];
 	}
 }
 
@@ -514,11 +527,19 @@ extern "C" CGImageRef UIGetScreenImage();
 
 - (void)captureScreen
 {
-    // WebPageTest expects us to provide frame file names that are 0-padded and divided into ms
-    NSInteger fpsMult = round(10 / [[[NSUserDefaults standardUserDefaults] objectForKey:kBZFPSSettingsKey] floatValue]);
+    // How long has it been since we started recording?  NSTimeInterval is
+    // a floating point value, so fractional parts of seconds are supported.
+    NSTimeInterval timeSinceStartInSeconds = -[recordingTimerStarted timeIntervalSinceNow];
 
-	[self captureScreen:[NSString stringWithFormat:@"frame_%04d.jpg", currentFrame*fpsMult] important:NO];
-	++currentFrame;
+    // The WebPageTest server expects the file name to include the time as the
+    // integer number of tenths of seconds.
+    int tenthsOfSecondsSinceStart = (int)(timeSinceStartInSeconds * 10.0);
+    NSString *cacheString = (currentSubRun == 1 ? @"Cached_" : @"");
+
+    NSString *identifier =  [NSString stringWithFormat:@"%d_%@progress_%04d.jpg",
+                                 currentRun, cacheString, tenthsOfSecondsSinceStart, nil];
+
+	[self captureScreen:identifier important:NO];
 }
 
 - (void)pauseRecording
@@ -527,6 +548,9 @@ extern "C" CGImageRef UIGetScreenImage();
 		[recordingTimer invalidate];
 		[recordingTimer release];
 		recordingTimer = nil;
+
+		[recordingTimerStarted release];
+		recordingTimerStarted = nil;
 	}
 }
 

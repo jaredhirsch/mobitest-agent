@@ -219,10 +219,10 @@ static BZJobManager *sharedInstance;
     
 	NSString *pattern;
 	if ([url characterAtIndex:[url length] - 1] == '/') {
-		pattern = @"work/workdone.php?har=1&done=1&location=%@&key=%@&id=%@";
+		pattern = @"work/workdone.php?har=1&done=1&location=%@&key=%@&id=%@&flattenZippedHar=1";
 	}
 	else {
-		pattern = @"/work/workdone.php?har=1&done=1&location=%@&key=%@&id=%@";
+		pattern = @"/work/workdone.php?har=1&done=1&location=%@&key=%@&id=%@&flattenZippedHar=1";
 	}
 	
 	url = [url stringByAppendingFormat:pattern, [[NSUserDefaults standardUserDefaults] objectForKey:kBZJobsLocationSettingsKey], [[NSUserDefaults standardUserDefaults] objectForKey:kBZJobsLocationKeySettingsKey], result.jobId, nil];

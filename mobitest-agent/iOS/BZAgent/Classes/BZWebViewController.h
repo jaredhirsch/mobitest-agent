@@ -39,7 +39,6 @@
 	float timeout;
 	int currentRun;
 	int currentSubRun;
-	int currentFrame;
 	BOOL completing;
 	BOOL preCache;
     NSTimeInterval startPostLoadRecording;
@@ -49,6 +48,8 @@
 	UIButton *stopPollingButton;
 	
 	NSTimer *timeoutTimer;
+
+	NSDate *recordingTimerStarted;
 	NSTimer *recordingTimer;
 	
 	NSString *cacheFolder;
