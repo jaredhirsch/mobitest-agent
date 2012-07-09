@@ -1,7 +1,6 @@
 The iOS Agent has several dependencies. 
 
-Except for the CocoaWithLove headers, the other dependencies should be downloaded from their respective repositories and built.
-The Xcode project may need to be updated to point to the correct location for those dependencies.
+A working copy is checked in to the repository.  You should not need to change it.
 
 ASI HTTP Request
 ================
@@ -23,3 +22,6 @@ CocoaWithLove
 Get it at http://cocoawithlove.com/2009/06/base64-encoding-options-on-mac-and.html (direct link to download: http://projectswithlove.com/projects/NSData_Base64.zip)
 The .h and .m files should be placed under the CocoaWithLove subfolder of this Dependencies folder
 Permissively licensed.
+
+See the file README.mobitest in each dependency for more information.
+
