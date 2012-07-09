@@ -226,4 +226,34 @@ public final class SettingsUtil {
 	{
 		return getSharedPreferences(context).getBoolean("process_hars_on_server", false);
 	}
+
+	public static int getInitialScale(Context context) {
+		String prefValue = getSharedPreferences(context).getString("initial_scale_for_webView", "");
+		// If the user set a pref, use it.
+		if (!prefValue.equals("")) {
+			try {
+				return Integer.parseInt(prefValue);
+			} catch (NumberFormatException ex) {
+				assert false : "Android prefs system should not allow non-integer values.";
+			}
+		}
+		
+		// The preference is not set.  Choose a default based on the version
+		// of Android.  Before version 4.0, a scale factor of 1% on a web view
+		// (i.e. webView.setInitialScale(1)) was experimentally determined to
+		// behave in the most realistic way.  Starting in Android 4.0, setting
+		// the scale to 1% causes the web view to zoom out so far that the page
+		// is not recognizable.  Setting the zoom to 100 was empirically shown
+		// to make the page look like the real system browser on a Nexus S 4G
+		// running Android 4.0
+
+		// Ideally we could use android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH,
+		// but it does not exist on older SDKs.
+		final int ICE_CREAM_SANDWICH_VERSION_CODE = 14;
+		if (android.os.Build.VERSION.SDK_INT < ICE_CREAM_SANDWICH_VERSION_CODE) {
+			return 1;
+		} else {
+			return 100;
+		}
+	}
 }

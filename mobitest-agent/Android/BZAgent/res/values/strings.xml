@@ -33,4 +33,6 @@
     <string name="restart_between_jobs">Restart Between Jobs</string>
     <string name="use_experimental_pcap2har">Test latest pcap2har</string>
     <string name="process_hars_on_server">Process HARs on server</string>
+    <string name="initial_scale_for_webView">Scale percentage for webview</string>
+    <string name="initial_scale_for_webView_summary">Initial scale for webview.  Leave blank for a reasonable default.  Set to 0 for system default.</string>
 </resources>

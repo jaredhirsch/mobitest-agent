@@ -255,7 +255,16 @@ public class WebActivity extends Activity {
 		webView.setWebViewClient(new AgentWebViewClient());
 		webView.setPictureListener(new AgentPictureListener());
 		webView.setWebChromeClient(new AgentChromeClient());
-		webView.setInitialScale(1); // Set the initial scale 1. Sites with mobile CSS wil render fine with this, sites without will be dealt with as if they're huge
+
+		// Set the initial scale of the webview.  User can set a pref to control
+		// this value.  If no pref is set, we choose a sensible default in
+		// SettingsUtil.getInitialScale().  These defaults were decided by
+		// testing on real devices.  If the scale of a loading page looks wrong,
+		// see if changing the preference named @string/initial_scale_for_webView
+		// helps.  If so, consider updating the default value logic in
+		// SettingsUtil.getInitialScale().
+		int initialScale = SettingsUtil.getInitialScale(getBaseContext());
+		webView.setInitialScale(initialScale);
 
 		// webView.addJavascriptInterface(this, "blazeAgentDocumentCallback");
 		setContentView(view);
