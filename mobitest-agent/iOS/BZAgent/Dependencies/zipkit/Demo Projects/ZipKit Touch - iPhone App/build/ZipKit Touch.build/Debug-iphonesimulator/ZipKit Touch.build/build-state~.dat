@@ -1,0 +1,305 @@
+TZipKit Touch
+v4
+r1
+cCheck dependencies
+cProcessInfoPlistFile "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/Info.plist" ZipKit_Touch-Info.plist
+cCpResource ZipKitTest.zip "build/Debug-iphonesimulator/ZipKit Touch.app/ZipKitTest.zip"
+cCompileXIB "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/RootViewController.xib"
+cCompileXIB "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/MainWindow.xib"
+cCpResource ZipKit_Touch.png "build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit_Touch.png"
+cProcessPCH /var/folders/++/++28u+++6+0++4RjPqRgNE+-0iU/-Caches-/com.apple.Xcode.68328/SharedPrecompiledHeaders/ZipKit_Touch_Prefix-axtfqhxzvatdcpfdrugpnubpsdud/ZipKit_Touch_Prefix.pch.pth ZipKit_Touch_Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC "build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/main.o" "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/main.m" normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC "build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/ZipKit_TouchAppDelegate.o" "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/Classes/ZipKit_TouchAppDelegate.m" normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC "build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/RootViewController.o" "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/Classes/RootViewController.m" normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cLd "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit Touch" normal i386
+cGenerateDSYMFile "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app.dSYM" "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit Touch"
+cTouch "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app"
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk
+c000000004EFDE9410000000000000110
+t1325263169
+s272
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004E72F1CC0000000000245480
+t1316155852
+s2380928
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004E72F2960000000000353830
+t1316156054
+s3487792
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004E72F28F0000000000001534
+t1316156047
+s5428
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004E78066A0000000000000BCB
+t1316488810
+s3019
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004E7806AB00000000008F7390
+t1316488875
+s9401232
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk/usr/include/Availability.h
+c000000004E5C62D90000000000001B38
+t1314677465
+s6968
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk/usr/lib/libz.dylib
+c000000004E72EDC60000000000013460
+t1316154822
+s78944
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/Classes/RootViewController.m
+c000000004F843BC10000000000000A03
+t1334066113
+s2563
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/Classes/ZipKit_TouchAppDelegate.m
+c000000004F843BC1000000000000019C
+t1334066113
+s412
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/MainWindow.xib
+c000000004F843BC10000000000002BFA
+t1334066113
+s11258
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/RootViewController.xib
+c000000004F843BC100000000000042D8
+t1334066113
+s17112
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/ZipKitTest.zip
+c000000004F843BC100000000000081B7
+t1334066113
+s33207
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/ZipKit_Touch.png
+c000000004F843BC10000000000001993
+t1334066113
+s6547
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/ZipKit_Touch_Prefix.pch
+c000000004F843BC1000000000000014A
+t1334066113
+s330
+i<Availability.h>
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app
+t2
+s0
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app.dSYM
+t2
+s0
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/Info.plist
+t2
+s0
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/MainWindow.nib
+t2
+s0
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/PkgInfo
+t2
+s0
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/RootViewController.nib
+t2
+s0
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit Touch
+t2
+s0
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/ZipKitTest.zip
+t2
+s0
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit_Touch.png
+t2
+s0
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/RootViewController.o
+t2
+s0
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/ZipKit Touch.LinkFileList
+c000000004F843C0E0000000000000294
+t1334066190
+s660
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/ZipKit_TouchAppDelegate.o
+t2
+s0
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/main.o
+t2
+s0
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/main.m
+c000000004F843BC100000000000000E0
+t1334066113
+s224
+
+N/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/build/Debug-iphonesimulator/libtouchzipkit.a
+c000000004F843C0E0000000000063EC8
+t1334066190
+s409288
+
+N/var/folders/++/++28u+++6+0++4RjPqRgNE+-0iU/-Caches-/com.apple.Xcode.68328/SharedPrecompiledHeaders/ZipKit_Touch_Prefix-axtfqhxzvatdcpfdrugpnubpsdud/ZipKit_Touch_Prefix.pch.pth
+t2
+s0
+
+NZipKit_Touch-Info.plist
+c000000004F843BC10000000000000388
+t1334066113
+s904
+
+CBuild AST from "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/Classes/RootViewController.m"
+r0
+
+CBuild AST from "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/Classes/ZipKit_TouchAppDelegate.m"
+r0
+
+CBuild AST from "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/main.m"
+r0
+
+CCheck dependencies
+r0
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependenciesb58dab8e7334b541^ae66ad8e7334b541^---0#1#0#--18"Check dependencies36"F4E96C7E-C9BE-4149-AF9B-D80FD6E4E11D-
+
+CCompileC "build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/RootViewController.o" "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/Classes/RootViewController.m" normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s355758992.281254
+e355758992.350753
+r1
+xCompileC
+xbuild/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/RootViewController.o
+x/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/Classes/RootViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection152"Compile /Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/Classes/RootViewController.meb3a48907334b541^47cb59907334b541^---0#0#0#-19%DVTDocumentLocation2@170"file://localhost/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo%20Projects/ZipKit%20Touch%20-%20iPhone%20App/Classes/RootViewController.m0000000000000000^3753"CompileC "build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/RootViewController.o" Classes/RootViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk -fexceptions -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -iquote "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/ZipKit Touch-generated-files.hmap" "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/ZipKit Touch-own-target-headers.hmap" "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/ZipKit Touch-all-target-headers.hmap" -iquote "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/ZipKit Touch-project-headers.hmap" "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/include" -I../.. "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/DerivedSources/i386" "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/DerivedSources" "-F/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator" -include /var/folders/++/++28u+++6+0++4RjPqRgNE+-0iU/-Caches-/com.apple.Xcode.68328/SharedPrecompiledHeaders/ZipKit_Touch_Prefix-axtfqhxzvatdcpfdrugpnubpsdud/ZipKit_Touch_Prefix.pch -MMD -MT dependencies -MF "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/RootViewController.d" -c "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/Classes/RootViewController.m" -o "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/RootViewController.o"36"BE582B94-7B06-49F4-8751-77580DC40D7B-
+
+CCompileC "build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/ZipKit_TouchAppDelegate.o" "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/Classes/ZipKit_TouchAppDelegate.m" normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s355758992.280112
+e355758992.342434
+r1
+xCompileC
+xbuild/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/ZipKit_TouchAppDelegate.o
+x/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/Classes/ZipKit_TouchAppDelegate.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection157"Compile /Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/Classes/ZipKit_TouchAppDelegate.me0f747907334b541^9f1d58907334b541^---0#0#0#-19%DVTDocumentLocation2@175"file://localhost/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo%20Projects/ZipKit%20Touch%20-%20iPhone%20App/Classes/ZipKit_TouchAppDelegate.m0000000000000000^3778"CompileC "build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/ZipKit_TouchAppDelegate.o" Classes/ZipKit_TouchAppDelegate.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk -fexceptions -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -iquote "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/ZipKit Touch-generated-files.hmap" "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/ZipKit Touch-own-target-headers.hmap" "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/ZipKit Touch-all-target-headers.hmap" -iquote "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/ZipKit Touch-project-headers.hmap" "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/include" -I../.. "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/DerivedSources/i386" "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/DerivedSources" "-F/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator" -include /var/folders/++/++28u+++6+0++4RjPqRgNE+-0iU/-Caches-/com.apple.Xcode.68328/SharedPrecompiledHeaders/ZipKit_Touch_Prefix-axtfqhxzvatdcpfdrugpnubpsdud/ZipKit_Touch_Prefix.pch -MMD -MT dependencies -MF "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/ZipKit_TouchAppDelegate.d" -c "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/Classes/ZipKit_TouchAppDelegate.m" -o "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/ZipKit_TouchAppDelegate.o"36"B9DE0CA5-FF59-41BE-9078-3D0BAAFA6CF2-
+
+CCompileC "build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/main.o" "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/main.m" normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s355758992.280012
+e355758992.312184
+r1
+xCompileC
+xbuild/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/main.o
+x/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection130"Compile /Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/main.mbef747907334b541^faed4f907334b541^---0#0#0#-19%DVTDocumentLocation2@148"file://localhost/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo%20Projects/ZipKit%20Touch%20-%20iPhone%20App/main.m0000000000000000^3667"CompileC "build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/main.o" main.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk -fexceptions -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -iquote "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/ZipKit Touch-generated-files.hmap" "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/ZipKit Touch-own-target-headers.hmap" "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/ZipKit Touch-all-target-headers.hmap" -iquote "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/ZipKit Touch-project-headers.hmap" "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/include" -I../.. "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/DerivedSources/i386" "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/DerivedSources" "-F/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator" -include /var/folders/++/++28u+++6+0++4RjPqRgNE+-0iU/-Caches-/com.apple.Xcode.68328/SharedPrecompiledHeaders/ZipKit_Touch_Prefix-axtfqhxzvatdcpfdrugpnubpsdud/ZipKit_Touch_Prefix.pch -MMD -MT dependencies -MF "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/main.d" -c "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/main.m" -o "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/main.o"36"8FDAFB62-BD40-483B-BAB3-D7F83AE51D6B-
+
+CCompileXIB "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/MainWindow.xib"
+s355758990.699088
+e355758990.735459
+r1
+xCompileXIB
+x/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/MainWindow.xib
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection140"Compiling /Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/MainWindow.xibd21ab38e7334b541^3d47bc8e7334b541^---0#0#0#-19%DVTDocumentLocation2@156"file://localhost/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo%20Projects/ZipKit%20Touch%20-%20iPhone%20App/MainWindow.xib0000000000000000^896"CompileXIB MainWindow.xib    cd "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App"    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.0    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    setenv XCODE_DEVELOPER_USR_PATH /Developer/usr/bin/..    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/MainWindow.nib" "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/MainWindow.xib" --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk36"A03F49D6-1B7D-431D-8CE1-2789867AB7BE-
+
+CCompileXIB "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/RootViewController.xib"
+s355758990.699083
+e355758991.469944
+r1
+xCompileXIB
+x/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/RootViewController.xib
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection148"Compiling /Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/RootViewController.xibb519b38e7334b541^e84e788f7334b541^---0#0#0#-19%DVTDocumentLocation2@164"file://localhost/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo%20Projects/ZipKit%20Touch%20-%20iPhone%20App/RootViewController.xib0000000000000000^920"CompileXIB RootViewController.xib    cd "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App"    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.0    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    setenv XCODE_DEVELOPER_USR_PATH /Developer/usr/bin/..    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/RootViewController.nib" "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/RootViewController.xib" --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk36"4C62B8C9-044E-476F-B030-67658E5192A2-
+
+CCpResource ZipKitTest.zip "build/Debug-iphonesimulator/ZipKit Touch.app/ZipKitTest.zip"
+s355758990.698513
+e355758990.701242
+r1
+xCpResource
+xZipKitTest.zip
+xbuild/Debug-iphonesimulator/ZipKit Touch.app/ZipKitTest.zip
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection64"Copy build/Debug-iphonesimulator/ZipKit Touch.app/ZipKitTest.zip35edb28e7334b541^fd84b38e7334b541^---0#0#0#-19%DVTDocumentLocation2@203"file://localhost/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo%20Projects/ZipKit%20Touch%20-%20iPhone%20App/build/Debug-iphonesimulator/ZipKit%20Touch.app/ZipKitTest.zip00f8641ddcffdf42^752"CpResource ZipKitTest.zip "build/Debug-iphonesimulator/ZipKit Touch.app/ZipKitTest.zip"    cd "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App"    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/ZipKitTest.zip" "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app"36"E123C02D-FF1E-45C4-831E-8A65FAC538EB-
+
+CCpResource ZipKit_Touch.png "build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit_Touch.png"
+s355758990.699105
+e355758990.703778
+r1
+xCpResource
+xZipKit_Touch.png
+xbuild/Debug-iphonesimulator/ZipKit Touch.app/ZipKit_Touch.png
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection66"Copy build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit_Touch.png5518b38e7334b541^7024b48e7334b541^---0#0#0#-19%DVTDocumentLocation2@205"file://localhost/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo%20Projects/ZipKit%20Touch%20-%20iPhone%20App/build/Debug-iphonesimulator/ZipKit%20Touch.app/ZipKit_Touch.png00f8641ddcffdf42^758"CpResource ZipKit_Touch.png "build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit_Touch.png"    cd "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App"    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/ZipKit_Touch.png" "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app"36"47C4B0D6-EF11-4387-A499-B8514A7351D9-
+
+CGenerateDSYMFile "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app.dSYM" "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit Touch"
+s355758992.709043
+e355758992.746386
+r1
+xGenerateDSYMFile
+x/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app.dSYM
+x/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit Touch
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection176"Generating /Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app.dSYM9d9cb5907334b541^3813bf907334b541^---0#0#0#-19%DVTDocumentLocation2@193"file://localhost/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo%20Projects/ZipKit%20Touch%20-%20iPhone%20App/build/Debug-iphonesimulator/ZipKit%20Touch.app.dSYM00f8641ddcffdf42^764"GenerateDSYMFile "build/Debug-iphonesimulator/ZipKit Touch.app.dSYM" "build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit Touch"    cd "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App"    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit Touch" -o "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app.dSYM"36"CC670D64-C001-4F36-ACEB-87595C67C6F3-
+
+CLd "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit Touch" normal i386
+s355758992.352580
+e355758992.707804
+r1
+xLd
+x/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit Touch
+xnormal
+xi386
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection178"Link /Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit Touch80605a907334b541^6a34b5907334b541^---0#0#0#--1604"Ld "build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit Touch" normal i386    cd "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App"    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/clang -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk "-L/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator" "-F/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator" -filelist "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/Objects-normal/i386/ZipKit Touch.LinkFileList" -mmacosx-version-min=10.6 -Xlinker -objc_abi_version -Xlinker 2 -ObjC -all_load -Xlinker -no_implicit_dylibs -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -framework Foundation -framework UIKit -framework CoreGraphics -lz /Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/build/Debug-iphonesimulator/libtouchzipkit.a -o "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/ZipKit Touch"36"36E990B1-95FF-4ED2-95E4-F3649FF5B51D-
+
+CProcessInfoPlistFile "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/Info.plist" ZipKit_Touch-Info.plist
+s355758990.691210
+e355758990.696139
+r1
+xProcessInfoPlistFile
+x/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/Info.plist
+xZipKit_Touch-Info.plist
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection31"Process ZipKit_Touch-Info.plist8731b18e7334b541^1537b28e7334b541^---0#0#0#-19%DVTDocumentLocation2@165"file://localhost/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo%20Projects/ZipKit%20Touch%20-%20iPhone%20App/ZipKit_Touch-Info.plist0000000000000000^834"ProcessInfoPlistFile "build/Debug-iphonesimulator/ZipKit Touch.app/Info.plist" ZipKit_Touch-Info.plist    cd "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App"    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility ZipKit_Touch-Info.plist -genpkginfo "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/PkgInfo" -expandbuildsettings -format binary -platform iphonesimulator -o "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app/Info.plist"36"6BB61C95-8B65-4F6A-BF07-AF3C8F303DFF-
+
+CProcessPCH /Users/skerner/Library/Developer/Xcode/DerivedData/ZipKit-cjopgjzaxghokwehqxhzifjiwrpb/Index/PrecompiledHeaders/ZipKit_Touch_Prefix-dywsmitnpiclendyqtidderhecpq_ast/ZipKit_Touch_Prefix.pch.pth ZipKit_Touch_Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CProcessPCH /var/folders/++/++28u+++6+0++4RjPqRgNE+-0iU/-Caches-/com.apple.Xcode.68328/SharedPrecompiledHeaders/ZipKit_Touch_Prefix-axtfqhxzvatdcpfdrugpnubpsdud/ZipKit_Touch_Prefix.pch.pth ZipKit_Touch_Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s355758991.472518
+e355758992.278515
+r1
+xProcessPCH
+x/var/folders/++/++28u+++6+0++4RjPqRgNE+-0iU/-Caches-/com.apple.Xcode.68328/SharedPrecompiledHeaders/ZipKit_Touch_Prefix-axtfqhxzvatdcpfdrugpnubpsdud/ZipKit_Touch_Prefix.pch.pth
+xZipKit_Touch_Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection34"Precompile ZipKit_Touch_Prefix.pch3f1b798f7334b541^514f47907334b541^---0#0#0#-19%DVTDocumentLocation2@165"file://localhost/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo%20Projects/ZipKit%20Touch%20-%20iPhone%20App/ZipKit_Touch_Prefix.pch0000000000000000^3540"ProcessPCH /var/folders/++/++28u+++6+0++4RjPqRgNE+-0iU/-Caches-/com.apple.Xcode.68328/SharedPrecompiledHeaders/ZipKit_Touch_Prefix-axtfqhxzvatdcpfdrugpnubpsdud/ZipKit_Touch_Prefix.pch.pth ZipKit_Touch_Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/clang -x objective-c-header -arch i386 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-shorten-64-to-32 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk -fexceptions -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -fvisibility=hidden -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -iquote "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/ZipKit Touch-generated-files.hmap" "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/ZipKit Touch-own-target-headers.hmap" "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/ZipKit Touch-all-target-headers.hmap" -iquote "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/ZipKit Touch-project-headers.hmap" "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/include" -I../.. "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/DerivedSources/i386" "-I/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/ZipKit Touch.build/Debug-iphonesimulator/ZipKit Touch.build/DerivedSources" "-F/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator" -c "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/ZipKit_Touch_Prefix.pch" -o /var/folders/++/++28u+++6+0++4RjPqRgNE+-0iU/-Caches-/com.apple.Xcode.68328/SharedPrecompiledHeaders/ZipKit_Touch_Prefix-axtfqhxzvatdcpfdrugpnubpsdud/ZipKit_Touch_Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/++/++28u+++6+0++4RjPqRgNE+-0iU/-Caches-/com.apple.Xcode.68328/SharedPrecompiledHeaders/ZipKit_Touch_Prefix-axtfqhxzvatdcpfdrugpnubpsdud/ZipKit_Touch_Prefix.pch.d36"77C77A68-5806-4EFE-893B-A2540AA5666A-
+
+CTouch "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app"
+s355758992.748834
+e355758992.755557
+r1
+xTouch
+x/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app
+lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection166"Touch /Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app8bc5bf907334b541^2b6dc1907334b541^---0#0#0#--494"Touch "build/Debug-iphonesimulator/ZipKit Touch.app"    cd "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App"    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c "/Users/skerner/w/gitMobitest/mobitest-agent/iOS/BZAgent/Dependencies/zipkit/Demo Projects/ZipKit Touch - iPhone App/build/Debug-iphonesimulator/ZipKit Touch.app"36"8259598E-6121-42A6-9A90-C4A5A5880E06-
+

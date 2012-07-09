@@ -1,0 +1,6 @@
+
+The magic incantation to build these libs:
+
+xcodebuild -target touchzipkit -sdk iphoneos5.0
+xcodebuild -target touchzipkit -sdk iphonesimulator5.0
+
