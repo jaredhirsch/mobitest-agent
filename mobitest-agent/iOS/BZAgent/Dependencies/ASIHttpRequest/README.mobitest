@@ -1,0 +1,14 @@
+URL: http://allseeing-i.com/ASIHTTPRequest/
+
+Version: Downloaded latest version on 2012/04/10.
+
+License: BSD
+
+License File: LICENSE
+
+Description:
+  Allows mobitest to make HTTP requests to the WebpageTest server.
+
+Local Modifications: 
+  No modifications.
+
