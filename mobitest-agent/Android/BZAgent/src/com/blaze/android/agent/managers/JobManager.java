@@ -304,7 +304,7 @@ public final class JobManager implements ResponseListener {
 		Log.i(BZ_JOB_MANAGER, "Preparing a POST request for pcap2har (" + url + ")");
 		HttpPost pcap2harRequest = pcapPostBuilder.BuildPostForUrl(url);
 		
-		Pcap2HarResponseListener responseListner = new Pcap2HarResponseListener(activity, run.getHarFile(), useExperimentalPcap2Har);
+		Pcap2HarResponseListener responseListner = new Pcap2HarResponseListener(activity, useExperimentalPcap2Har);
 		executor.execute(new AsyncRequest(pcap2harRequest, responseListner, client, new Handler(), null, new File(run.getHarFile())));
 	}
 	

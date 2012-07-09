@@ -1,9 +1,6 @@
 package com.blaze.android.agent.util;
 
-import java.io.IOException;
 import java.util.Vector;
-
-import com.blaze.android.agent.Constants;
 
 import android.content.Context;
 import android.content.SharedPreferences;

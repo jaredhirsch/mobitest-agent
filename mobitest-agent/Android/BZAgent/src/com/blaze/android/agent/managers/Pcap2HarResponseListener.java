@@ -13,13 +13,11 @@ public class Pcap2HarResponseListener implements ResponseListener
 	private static final String BZ_PCAP_2_HAR = "BZ-Pcap2Har";
 	
 	private WebActivity activity = null;
-	private String harPath = null;
 	private boolean requestIsUsingExperimentalPcap2Har = false;
 
-	public Pcap2HarResponseListener(WebActivity activity, String harPath, boolean requestIsUsingExperimentalPcap2Har)
+	public Pcap2HarResponseListener(WebActivity activity, boolean requestIsUsingExperimentalPcap2Har)
 	{
 		this.activity = activity;
-		this.harPath = harPath;
 		this.requestIsUsingExperimentalPcap2Har = requestIsUsingExperimentalPcap2Har;
 	}
 

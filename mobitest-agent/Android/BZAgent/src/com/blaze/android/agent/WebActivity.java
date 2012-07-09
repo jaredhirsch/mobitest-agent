@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Date;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -399,7 +398,7 @@ public class WebActivity extends Activity {
 
 		// Reset run-specific data
 		startRenderSeen = false;
-		didCaptureCurrentDrawingCache  = true;
+		didCaptureCurrentDrawingCache = true;
 		startLoading();
 	}
 

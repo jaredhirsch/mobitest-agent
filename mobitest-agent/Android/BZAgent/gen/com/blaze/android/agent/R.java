@@ -50,6 +50,8 @@ public final class R {
         public static final int base_path=0x7f06001a;
         public static final int delay=0x7f060011;
         public static final int fps=0x7f060010;
+        public static final int initial_scale_for_webView=0x7f060021;
+        public static final int initial_scale_for_webView_summary=0x7f060022;
         public static final int job_url1=0x7f060016;
         public static final int job_url2=0x7f060017;
         public static final int job_url3=0x7f060018;
