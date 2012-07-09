@@ -1,0 +1,14 @@
+URL: https://github.com/TouchCode/TouchJSON
+
+Version: Downloaded latest version on 2012/04/10.
+
+License: BSD
+
+License File: LICENSE
+
+Description:
+  Used to parse and encode JSON for communication with WebpageTest servers.
+
+Local Modifications: 
+  Added explicit LICENCE file.
+
