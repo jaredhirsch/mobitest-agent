@@ -3,7 +3,6 @@
 //  BZRecoverAgent
 //
 //  Created by Joshua Tessier on 11-02-19.
-//  Copyright 2011 Blaze. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
