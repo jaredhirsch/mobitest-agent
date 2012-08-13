@@ -3,7 +3,6 @@
 //  BZAgent
 //
 //  Created by Joshua Tessier on 10-11-17.
-//  Copyright 2010 Blaze. All rights reserved.
 //
 
 //Debugging constants
@@ -106,7 +105,7 @@ extern const NSString *BZPasswordKey;
 #define kBZPollingImage @"polling.png"
 #define kBZWaitingImage @"waiting.png"
 #define kBZUploadingImage @"upload.png"
-#define kBZBrandingImage @"blaze_logo.png"
+#define kBZBrandingImage @"akamai_logo.png"
 
 #define kBZPollButton @"poll_button.png"
 #define kBZPollButtonPressed @"poll_button_pressed.png"

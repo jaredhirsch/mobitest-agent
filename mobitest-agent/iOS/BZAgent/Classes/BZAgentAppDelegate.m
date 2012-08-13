@@ -3,7 +3,6 @@
 //  BZAgent
 //
 //  Created by Joshua Tessier on 10-11-17.
-//  Copyright 2010 Blaze. All rights reserved.
 //
 
 #import "BZAgentAppDelegate.h"
@@ -78,7 +77,7 @@ void restartAndKill();
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSString *url1 = [defaults objectForKey:kBZJobsURL1SettingsKey];
 	if (!url1) {
-		[defaults setObject:@"http://wpt.blaze.io/" forKey:kBZJobsURL1SettingsKey];
+		[defaults setObject:@"http://your.wpt.server/" forKey:kBZJobsURL1SettingsKey];
 	}
 	NSString *url2 = [defaults objectForKey:kBZJobsURL2SettingsKey];
 	if (!url2) {
@@ -168,9 +167,9 @@ void restartAndKill()
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"BlazeRecoverAgent://"]];
         if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"BlazeRecoverAgent://"]]) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"BlazeRecoverAgent://"]];
-            NSLog(@"About to kill current BlazeAgent app");
+            NSLog(@"About to kill current Mobitest app");
             kill(getpid(), 1);
-            NSLog(@"Done killing current BlazeAgent app");
+            NSLog(@"Done killing current Mobitest app");
         }
 	}
 }

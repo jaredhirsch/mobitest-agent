@@ -7,7 +7,6 @@
 // 
 //
 //  Created by Guy Podjarny on 11-09-19.
-//  Copyright (c) 2011 Blaze. All rights reserved.
 //
 
 #ifndef BZAgent_ArchiveResource_h

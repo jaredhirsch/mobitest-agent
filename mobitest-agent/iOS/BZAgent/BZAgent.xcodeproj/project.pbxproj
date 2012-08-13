@@ -14,6 +14,8 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		57EA4930153498EF00CC6469 /* libtouchzipkit.release.iphoneos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57EA492E153498EF00CC6469 /* libtouchzipkit.release.iphoneos.a */; };
 		57EA4931153498EF00CC6469 /* libtouchzipkit.release.iphonesimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57EA492F153498EF00CC6469 /* libtouchzipkit.release.iphonesimulator.a */; };
+		E2F7DCE315D3094800765C9B /* akamai_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E2F7DCE115D3094800765C9B /* akamai_logo.png */; };
+		E2F7DCE415D3094800765C9B /* akamai_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E2F7DCE215D3094800765C9B /* akamai_logo@2x.png */; };
 		F7020C00129EF21700BA9E11 /* upload.png in Resources */ = {isa = PBXBuildFile; fileRef = F7020BFF129EF21700BA9E11 /* upload.png */; };
 		F7020D1D129F379A00BA9E11 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = F7020D1C129F379A00BA9E11 /* NSData+Base64.m */; };
 		F71195DA12A5F7AB005CACF2 /* BZInspectorClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = F71195D912A5F7AB005CACF2 /* BZInspectorClient.mm */; };
@@ -56,8 +58,6 @@
 		F7AB4C83129DA53800CE4684 /* disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = F7AB4C80129DA53800CE4684 /* disabled.png */; };
 		F7AB4C84129DA53800CE4684 /* polling.png in Resources */ = {isa = PBXBuildFile; fileRef = F7AB4C81129DA53800CE4684 /* polling.png */; };
 		F7AB4C85129DA53800CE4684 /* waiting.png in Resources */ = {isa = PBXBuildFile; fileRef = F7AB4C82129DA53800CE4684 /* waiting.png */; };
-		F7C65E9912E0E1A90044F46C /* blaze_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F7C65E9712E0E1A90044F46C /* blaze_logo.png */; };
-		F7C65E9A12E0E1A90044F46C /* blaze_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7C65E9812E0E1A90044F46C /* blaze_logo@2x.png */; };
 		F7C65ED912E0E62C0044F46C /* poll_button.png in Resources */ = {isa = PBXBuildFile; fileRef = F7C65ED512E0E62C0044F46C /* poll_button.png */; };
 		F7C65EDA12E0E62C0044F46C /* poll_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7C65ED612E0E62C0044F46C /* poll_button@2x.png */; };
 		F7C65EDB12E0E62C0044F46C /* poll_button_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = F7C65ED712E0E62C0044F46C /* poll_button_pressed.png */; };
@@ -119,6 +119,8 @@
 		85C6A12B1428378000E2C1D1 /* WebViewPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewPrivate.h; sourceTree = "<group>"; };
 		85C6A12C1428419E00E2C1D1 /* WebPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebPreferences.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* BZAgent-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BZAgent-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		E2F7DCE115D3094800765C9B /* akamai_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = akamai_logo.png; sourceTree = "<group>"; };
+		E2F7DCE215D3094800765C9B /* akamai_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "akamai_logo@2x.png"; sourceTree = "<group>"; };
 		F7020BFF129EF21700BA9E11 /* upload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload.png; sourceTree = "<group>"; };
 		F7020D1B129F379A00BA9E11 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		F7020D1C129F379A00BA9E11 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
@@ -196,8 +198,6 @@
 		F7AB4C80129DA53800CE4684 /* disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disabled.png; sourceTree = "<group>"; };
 		F7AB4C81129DA53800CE4684 /* polling.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = polling.png; sourceTree = "<group>"; };
 		F7AB4C82129DA53800CE4684 /* waiting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waiting.png; sourceTree = "<group>"; };
-		F7C65E9712E0E1A90044F46C /* blaze_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blaze_logo.png; sourceTree = "<group>"; };
-		F7C65E9812E0E1A90044F46C /* blaze_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blaze_logo@2x.png"; sourceTree = "<group>"; };
 		F7C65ED512E0E62C0044F46C /* poll_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poll_button.png; sourceTree = "<group>"; };
 		F7C65ED612E0E62C0044F46C /* poll_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "poll_button@2x.png"; sourceTree = "<group>"; };
 		F7C65ED712E0E62C0044F46C /* poll_button_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poll_button_pressed.png; sourceTree = "<group>"; };
@@ -539,9 +539,9 @@
 		F7AB4C7F129DA53800CE4684 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E2F7DCE115D3094800765C9B /* akamai_logo.png */,
+				E2F7DCE215D3094800765C9B /* akamai_logo@2x.png */,
 				F7C65ED412E0E62C0044F46C /* Button */,
-				F7C65E9712E0E1A90044F46C /* blaze_logo.png */,
-				F7C65E9812E0E1A90044F46C /* blaze_logo@2x.png */,
 				F781C28E12A9F79500725FC1 /* noise_pattern.png */,
 				F781C28F12A9F79500725FC1 /* noise_pattern@2x.png */,
 				F7020BFF129EF21700BA9E11 /* upload.png */,
@@ -681,13 +681,13 @@
 				F7F97C5312A8703200BADFCA /* Default@2x.png in Resources */,
 				F781C29012A9F79500725FC1 /* noise_pattern.png in Resources */,
 				F781C29112A9F79600725FC1 /* noise_pattern@2x.png in Resources */,
-				F7C65E9912E0E1A90044F46C /* blaze_logo.png in Resources */,
-				F7C65E9A12E0E1A90044F46C /* blaze_logo@2x.png in Resources */,
 				F7C65ED912E0E62C0044F46C /* poll_button.png in Resources */,
 				F7C65EDA12E0E62C0044F46C /* poll_button@2x.png in Resources */,
 				F7C65EDB12E0E62C0044F46C /* poll_button_pressed.png in Resources */,
 				F7C65EDC12E0E62C0044F46C /* poll_button_pressed@2x.png in Resources */,
 				F77FEFD61383370E00CA39F5 /* Entitlements.plist in Resources */,
+				E2F7DCE315D3094800765C9B /* akamai_logo.png in Resources */,
+				E2F7DCE415D3094800765C9B /* akamai_logo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -744,6 +744,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SRCROOT)/Dependencies\"",
@@ -769,6 +771,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = BZAgent;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				VALID_ARCHS = armv7;
 				VERSIONING_SYSTEM = "";
 			};
@@ -779,6 +783,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SRCROOT)/Dependencies\"",
@@ -802,6 +808,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = BZAgent;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = armv7;
 				VERSIONING_SYSTEM = "";
@@ -882,6 +890,8 @@
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SRCROOT)/Dependencies\"",
@@ -904,6 +914,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = BZAgent;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = armv7;
 				VERSIONING_SYSTEM = "";

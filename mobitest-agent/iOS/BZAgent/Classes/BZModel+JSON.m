@@ -3,7 +3,6 @@
 //  BZAgent
 //
 //  Created by Joshua Tessier on 10-11-27.
-//  Copyright 2010 Blaze. All rights reserved.
 //
 
 #import "BZModel+JSON.h"
@@ -50,8 +49,8 @@
 	return [NSMutableDictionary dictionaryWithObjectsAndKeys:
 														@"1.5", @"version",
 			
-														[NSDictionary dictionaryWithObjectsAndKeys:	@"Blaze Agent", @"name",
-																									@"1.5", @"version", nil], @"creator",
+														[NSDictionary dictionaryWithObjectsAndKeys:	@"Mobitest", @"name",
+																									@"1.6", @"version", nil], @"creator",
 			
 														[NSDictionary dictionaryWithObjectsAndKeys: @"iOS - WebKit/Safari", @"name",
 																									[[UIDevice currentDevice] systemVersion], @"version", nil], @"browser",

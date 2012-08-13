@@ -3,7 +3,6 @@
 //  BZAgent
 //
 //  Created by Joshua Tessier on 10-12-01.
-//  Copyright 2010 Blaze. All rights reserved.
 //
 //
 //#import "BZWebInspectorFrontend.h"
