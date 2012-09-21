@@ -29,4 +29,6 @@
 	BOOL busy;
 }
 
++ (void)clearCachesFolder;
+
 @end

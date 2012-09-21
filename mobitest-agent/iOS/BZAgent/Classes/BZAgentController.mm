@@ -29,7 +29,6 @@
 - (void)stopPolling;
 - (void)pollForJobs:(BOOL) fromAuto;
 
-- (void)clearCachesFolder;
 - (void)switchActiveUrl;
 
 - (void)resetScreenSaverTimer;
@@ -245,7 +244,7 @@
 {	
 	if (!busy) {
 		//First step is to clear the caches folder from last run... this is to make sure this app doesn't become bloated.
-		[self clearCachesFolder];
+		[BZAgentController clearCachesFolder];
 		
 		//Now poll for the next one if there are none in the queue.  Make sure that this is sequential so that the upload does not affect the next job.  We could theoretically download at the same time though.
 		BZJobManager *jobManager = [BZJobManager sharedInstance];
@@ -480,7 +479,7 @@
 #pragma mark -
 #pragma mark Helper Methods
  
-- (void)clearCachesFolder
++ (void)clearCachesFolder
 {
 	NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 	NSError *error = nil;

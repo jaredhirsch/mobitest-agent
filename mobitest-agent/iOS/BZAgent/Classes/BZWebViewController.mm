@@ -6,6 +6,7 @@
 //
 
 #import "BZWebViewController.h"
+#import "BZAgentController.h"
 
 //Additions
 #import "NSData+Base64.h"
@@ -241,6 +242,8 @@ extern "C" CGImageRef UIGetScreenImage();
 //		--currentSubRun;
 	}
 	else {
+        
+		//[BZAgentController clearCachesFolder];
 		NSLog(@"****** Running the FIRST VIEW %d-%d", currentRun, currentSubRun);
 		[objc_getClass("WebCache") setDisabled:YES];
 		[objc_getClass("WebCache") setDisabled:NO];
@@ -384,7 +387,9 @@ extern "C" CGImageRef UIGetScreenImage();
 		}
 	}
 
-	NSString *libraryFolder = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"WebKit"];
+    NSString *cacheFolder = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] retain];
+    
+	NSString *libraryFolder = [cacheFolder stringByAppendingPathComponent:@"WebKit"];
 	NSError *error = nil;
 	[[NSFileManager defaultManager] removeItemAtPath:libraryFolder error:&error];
 	if (!error) {
@@ -394,7 +399,7 @@ extern "C" CGImageRef UIGetScreenImage();
 		}
 	}
 	
-	NSString *cookiesFolder = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"Cookies"];
+	NSString *cookiesFolder = [cacheFolder stringByAppendingPathComponent:@"Cookies"];
 	error = nil;
 	[[NSFileManager defaultManager] removeItemAtPath:cookiesFolder error:&error];
 	if (!error) {
@@ -403,6 +408,36 @@ extern "C" CGImageRef UIGetScreenImage();
 			NSLog(@"%@", error);
 		}
 	}
+    
+	NSString *browserCacheFolder = [cacheFolder stringByAppendingPathComponent:@"Caches/com.akamai.mobitest.agent"];
+	error = nil;
+	[[NSFileManager defaultManager] removeItemAtPath:browserCacheFolder error:&error];
+	if (!error) {
+		[[NSFileManager defaultManager] createDirectoryAtPath:browserCacheFolder withIntermediateDirectories:YES attributes:nil error:&error];
+		if (error) {
+			NSLog(@"%@", error);
+		}
+	}
+    
+    error = nil;
+    NSArray *cacheDirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:cacheFolder error:&error];
+    if (error) {
+        NSLog(@"%@", error);
+    }
+    for (NSString* cacheFile in cacheDirContents) {
+        NSString * ext = [cacheFile pathExtension];
+        if ([ext compare:@"localstorage"]==0)
+        {
+            error = nil;
+            NSString *fullCacheFile = [cacheFolder stringByAppendingPathComponent:cacheFile];
+            [[NSFileManager defaultManager] removeItemAtPath:fullCacheFile error:&error];
+            if (error) {
+                NSLog(@"%@", error);
+            }
+        }
+    }
+    
+    [cacheFolder release];
 }
 
 #pragma mark -
