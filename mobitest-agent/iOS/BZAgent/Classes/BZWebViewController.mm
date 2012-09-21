@@ -409,7 +409,7 @@ extern "C" CGImageRef UIGetScreenImage();
 		}
 	}
     
-	NSString *browserCacheFolder = [cacheFolder stringByAppendingPathComponent:@"Caches/com.akamai.mobitest.agent"];
+	NSString *browserCacheFolder = [cacheFolder stringByAppendingPathComponent:@"com.akamai.mobitest.agent"];
 	error = nil;
 	[[NSFileManager defaultManager] removeItemAtPath:browserCacheFolder error:&error];
 	if (!error) {
