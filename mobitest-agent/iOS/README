@@ -11,7 +11,7 @@ Since iOS devices aren't designed to be servers, the recover agent proved to be 
 Pre-requisites
 ============
 To compile and run, first download and build the dependencies listed in Dependencies/README-DEPENDENCIES
-iOS Agent supports iOS 4.2 and newer, and webpagetest server 2.5 or newer.
+iOS Agent supports iOS 4.2 and newer, and webpagetest server 2.8 or newer. (if using 2.8, you also need to download the latest version of workdone.php from trunk)
 
 The iOS Agent doesn't support location information, and it may cause the app to hang, so it's recommended to turn off location services in your phone's settings.
 
