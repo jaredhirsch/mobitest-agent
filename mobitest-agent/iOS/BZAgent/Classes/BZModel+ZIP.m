@@ -180,9 +180,14 @@
 
 - (NSData*)zipResultData
 {
-	NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-	NSString *archiveLocation = [[cachesFolder stringByDeletingLastPathComponent] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-results.zip", jobId]];
-	NSData *data = nil;
+    NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    NSString *resultFolder = [cachesFolder stringByAppendingPathComponent:@"result"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:resultFolder]) {
+		NSLog(@"Missing caches result folder");
+	}
+
+	NSString *archiveLocation = [[resultFolder stringByDeletingLastPathComponent] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-results.zip", jobId]];
 
 #if BZ_DEBUG_REQUESTS
 	NSLog(@"Creating Avisynth File");
@@ -197,8 +202,8 @@
 #endif
 		avisynth = [session transformVideoToAvisynth:fps];
 		if ([avisynth length] > 0) {
-			[avisynth writeToFile:[[cachesFolder stringByAppendingPathComponent:session.videoFolder] stringByAppendingPathComponent:@"video.avs"] atomically:NO encoding:NSUTF8StringEncoding error:nil];
-			[[NSString stringWithFormat:@"%d",fps] writeToFile:[[cachesFolder stringByAppendingPathComponent:session.videoFolder] stringByAppendingPathComponent:@"realfps.txt"] atomically:NO encoding:NSUTF8StringEncoding error:nil];
+			[avisynth writeToFile:[[resultFolder stringByAppendingPathComponent:session.videoFolder] stringByAppendingPathComponent:@"video.avs"] atomically:NO encoding:NSUTF8StringEncoding error:nil];
+			[[NSString stringWithFormat:@"%d",fps] writeToFile:[[resultFolder stringByAppendingPathComponent:session.videoFolder] stringByAppendingPathComponent:@"realfps.txt"] atomically:NO encoding:NSUTF8StringEncoding error:nil];
 		}
 #if BZ_DEBUG_REQUESTS
         NSLog(@"Scaling down images");
@@ -212,26 +217,28 @@
 	//Create the archive.  This will pick up the har file
 	ZKFileArchive *archive = [ZKFileArchive archiveWithArchivePath:archiveLocation];
 	archive.useZip64Extensions = YES;
-	NSArray *files = [archive.fileManager contentsOfDirectoryAtPath:cachesFolder error:nil];
+	NSArray *files = [archive.fileManager contentsOfDirectoryAtPath:resultFolder error:nil];
 	NSString *fullPath;
 	for (NSString *file in files) {
 #if BZ_DEBUG_REQUESTS
         NSLog(@"Adding file %@ to archive", file);
 #endif
-		fullPath = [cachesFolder stringByAppendingPathComponent:file];
+		fullPath = [resultFolder stringByAppendingPathComponent:file];
 		if ([archive.fileManager zk_isDirAtPath:fullPath]) {
-			[archive deflateDirectory:fullPath relativeToPath:cachesFolder usingResourceFork:NO];
+			[archive deflateDirectory:fullPath relativeToPath:resultFolder usingResourceFork:NO];
+            NSDirectoryEnumerator *en = [[[NSFileManager defaultManager] enumeratorAtPath:fullPath] retain];
+            [en release];
 		}
 		else {
-			[archive deflateFile:fullPath relativeToPath:cachesFolder usingResourceFork:NO];
+			[archive deflateFile:fullPath relativeToPath:resultFolder usingResourceFork:NO];
 		}
 	}
 
 #if BZ_DEBUG_REQUESTS
     NSLog(@"Reading data of file");
 #endif
-	//Grab it's data
-	data = [NSData dataWithContentsOfFile:archiveLocation];
+	//Grab its data
+	NSData *data = [NSData dataWithContentsOfFile:archiveLocation];
 	
 #if BZ_DEBUG_REQUESTS
     NSLog(@"Deleting old file");

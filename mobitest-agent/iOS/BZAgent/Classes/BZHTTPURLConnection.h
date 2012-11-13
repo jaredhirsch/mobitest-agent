@@ -9,7 +9,7 @@
 
 typedef enum {
 	BZHTTPURLConnectionTypeGetWork,
-	BZHTTPURLConnectionTypePublishHarVideo
+	BZHTTPURLConnectionTypePublishResult
 } BZHTTPURLConnectionType;
 
 //

@@ -48,7 +48,6 @@
 
 - (void)start;
 - (void)end;
-- (void)endAndMarkAsTimedOut;
 
 - (void)startLoading;
 - (void)render;

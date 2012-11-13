@@ -182,17 +182,22 @@ static BZJobManager *sharedInstance;
 
 - (void)postZip:(BZResult*)result url:(NSString*)url
 {	
-    @synchronized(self) {
-        static NSString *kBZBoundary = @"f09wjf09jbananafoiasdfjasdf";
-        
     #if BZ_DEBUG_REQUESTS
         NSLog(@"Posting zip");
     #endif
-        
-        NSData *zipData = [result zipResultData];
+
+    NSData *zipData = [result zipResultData];
+
+    @synchronized(self) {
         if (zipData) {
+        	static NSString *kBZBoundary = @"f09wjf09jbananafoiasdfjasdf";
             //Send off the video publish request
-            self.activeUploadHarRequest = [[[BZHTTPURLConnection alloc] initWithType:BZHTTPURLConnectionTypePublishHarVideo request:[self requestWithUrl:url data:zipData boundary:kBZBoundary formName:@"result" zipName:[NSString stringWithFormat:@"%@-results.zip", result.jobId]] delegate:self] autorelease];
+            BZHTTPURLConnectionType type = BZHTTPURLConnectionTypePublishResult;
+            NSURLRequest *request = [self requestWithUrl:url data:zipData boundary:kBZBoundary
+                formName:@"result" zipName:[NSString stringWithFormat:@"%@-results.zip", result.jobId]];
+            self.activeUploadHarRequest = [[[BZHTTPURLConnection alloc] initWithType:type
+                request:request delegate:self] autorelease];
+            //We'll get an async NSURLConnectionDelegate callback, e.g. connectionDidFinishLoading
         }
         else {
             self.activeUploadHarRequest = nil;
@@ -200,31 +205,18 @@ static BZJobManager *sharedInstance;
     }
 }
 
-- (void)publishResults:(BZResult*)result url:(NSString*)url
+- (void)publishResult:(BZResult*)result url:(NSString*)url
 {
 #if BZ_DEBUG_REQUESTS
 	NSLog(@"Publishing result");
 #endif
-	//Create the JSON data in a different thread, since it may take a while (it may have sync requests in it)
-    data = nil;
-    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        self->data = [result jsonDataFromResult];
-    });
-	NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-	//TODO: Clean this up a little, shouldn't have to do this here
-	//Now write the data to disk
-	[data writeToFile:[cachesFolder stringByAppendingPathComponent:@"results.har"] atomically:YES];
-	data = nil;
-    
-	NSString *pattern;
-	if ([url characterAtIndex:[url length] - 1] == '/') {
-		pattern = @"work/workdone.php?har=1&done=1&location=%@&key=%@&id=%@&flattenZippedHar=1";
-	}
-	else {
-		pattern = @"/work/workdone.php?har=1&done=1&location=%@&key=%@&id=%@&flattenZippedHar=1";
-	}
-	
-	url = [url stringByAppendingFormat:pattern, [[NSUserDefaults standardUserDefaults] objectForKey:kBZJobsLocationSettingsKey], [[NSUserDefaults standardUserDefaults] objectForKey:kBZJobsLocationKeySettingsKey], result.jobId, nil];
+    NSString *pattern = @"%@work/workdone.php?har=1&done=%@&location=%@&key=%@&id=%@&flattenZippedHar=1";
+    url = [url stringByAppendingFormat:pattern,
+            (([url characterAtIndex:[url length] - 1] == '/') ? @"" : @"/"),
+            (result.done ? @"1" : @"0"),
+            [[NSUserDefaults standardUserDefaults] objectForKey:kBZJobsLocationSettingsKey],
+            [[NSUserDefaults standardUserDefaults] objectForKey:kBZJobsLocationKeySettingsKey],
+            result.jobId, nil];
 
     //Now work package the data
     [self postZip:result url:url];
@@ -238,9 +230,9 @@ static BZJobManager *sharedInstance;
 	[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:type object:self userInfo:userInfo]];	
 }
 
-- (void)postResultUploadComplete
+- (void)postResultUploaded
 {
-	[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:BZJobUploadedNotification object:self userInfo:nil]];
+	[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:BZResultUploadedNotification object:self userInfo:nil]];
 }
 
 - (void)postFailedToGetJobs:(NSString*)reason
@@ -248,9 +240,9 @@ static BZJobManager *sharedInstance;
 	[self postError:BZFailedToGetJobsNotification reason:reason];
 }
 
-- (void)postFailedToUpload:(NSString*)reason
+- (void)postResultUploadFailed:(NSString*)reason
 {
-	[self postError:BZFailedToUploadJobNotification reason:reason];
+	[self postError:BZResultUploadFailedNotification reason:reason];
 }
 
 - (void)postNoJobs
@@ -287,7 +279,6 @@ static BZJobManager *sharedInstance;
         [connection clearData];
         
         NSInteger statusCode = [[connection response] statusCode];
-        
         if (statusCode == 0) {
             //Timeout
 #if BZ_DEBUG_REQUESTS
@@ -297,8 +288,8 @@ static BZJobManager *sharedInstance;
                 [self postError:BZFailedToGetJobsNotification reason:@"Could not poll: Timed out"];
                 self.activeRequest = nil;
             }
-            else if (connection.type == BZHTTPURLConnectionTypePublishHarVideo) {
-                [self postError:BZFailedToUploadJobNotification reason:@"Could not publish: Timed out"];
+            else if (connection.type == BZHTTPURLConnectionTypePublishResult) {
+                [self postError:BZResultUploadFailedNotification reason:@"Could not publish: Timed out"];
             }
         }
         else if (statusCode == 200)
@@ -325,9 +316,9 @@ static BZJobManager *sharedInstance;
                 //Clear the connection, let it end peacefully
                 self.activeRequest = nil;
             }
-            else if (connection.type == BZHTTPURLConnectionTypePublishHarVideo) {
+            else if (connection.type == BZHTTPURLConnectionTypePublishResult) {
                 self.activeUploadHarRequest = nil;
-                [self postResultUploadComplete];
+                [self postResultUploaded];
             }
         }
         else  
@@ -343,9 +334,9 @@ static BZJobManager *sharedInstance;
                 self.activeRequest = nil;
                 [self postFailedToGetJobs:[NSString stringWithFormat:@"Could not poll: [%d]", statusCode]];
             }
-            else if (connectionType == BZHTTPURLConnectionTypePublishHarVideo) {
+            else if (connectionType == BZHTTPURLConnectionTypePublishResult) {
                 self.activeUploadHarRequest = nil;
-                [self postFailedToUpload:[NSString stringWithFormat:@"Could not publish har: [%d]", statusCode]];
+                [self postResultUploadFailed:[NSString stringWithFormat:@"Could not publish har: [%d]", statusCode]];
             }
         }
     }
@@ -367,8 +358,8 @@ static BZJobManager *sharedInstance;
                 }
                 self.activeRequest = nil;
                 break;
-            case BZHTTPURLConnectionTypePublishHarVideo:
-                [self postFailedToUpload:[error description]];
+            case BZHTTPURLConnectionTypePublishResult:
+                [self postResultUploadFailed:[error description]];
                 // Try again            
                 break;
             default:

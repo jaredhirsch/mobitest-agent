@@ -17,6 +17,8 @@
 @class WebViewPrivate;
 
 @protocol BZWebViewControllerDelegate <NSObject>
+- (NSString *)getActiveUrl;
+- (void)jobFailed:(BZJob*)job;
 - (void)jobCompleted:(BZJob*)job withResult:(BZResult*)result;
 - (void)jobInterrupted:(BZJob*)job;
 - (void)stopPollingRequested;
@@ -51,7 +53,8 @@
 	NSDate *recordingTimerStarted;
 	NSTimer *recordingTimer;
 	
-	NSString *cacheFolder;
+	NSString *cachesFolder;
+	NSString *resultFolder;
     
     NSString *userAgent;
     

@@ -18,15 +18,21 @@
 @interface BZResult : NSObject {
 @private
 	NSString *jobId;
-	NSMutableArray *runs;
-	
+
 	// What image quality setting should be used to encode screenshots?
 	float screenShotImageQuality;
 
+	BOOL done;
+
+    //Completed runs that haven't been uploaded yet
+	NSMutableArray *runs;
+
+    //Active run
 	BZSession *currentRun;
 }
 
 @property (nonatomic, retain) NSString *jobId;
+@property (nonatomic) BOOL done;
 @property (nonatomic) float screenShotImageQuality;
 @property (nonatomic, readonly, retain) BZSession *currentRun;
 
@@ -54,6 +60,6 @@
 
 - (void)cleanupSession;
 - (void)endSession;
-- (void)endSessionAsTimeout;
+- (void)removeAllSessions;
 
 @end

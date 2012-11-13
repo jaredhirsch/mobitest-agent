@@ -17,8 +17,8 @@
 #define BZNoJobsNotification @"BZNoJobsNotification"
 #define BZFailedToGetJobsNotification @"BZFailedToGetJobsNotification"
 
-#define BZJobUploadedNotification @"BZJobUploadedNotification"
-#define BZFailedToUploadJobNotification @"BZFailedToUploadJobNotification"
+#define BZResultUploadedNotification @"BZResultUploadedNotification"
+#define BZResultUploadFailedNotification @"BZResultUploadFailedNotification"
 
 //Data gathering notification constants
 #define BZDataReceivedNotification @"BZDataReceivedNotification"

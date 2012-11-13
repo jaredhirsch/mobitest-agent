@@ -57,8 +57,6 @@
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobListUpdated:) name:BZNewJobReceivedNotification object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failedToGetJobs:) name:BZFailedToGetJobsNotification object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noJobs:) name:BZNoJobsNotification object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jobUploaded:) name:BZJobUploadedNotification object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failedToUploadJob:) name:BZFailedToUploadJobNotification object:nil];
 		
 		NSNumber *shouldAutoPoll = [[NSUserDefaults standardUserDefaults] objectForKey:kBZAutoPollSettingsKey];
 		if (shouldAutoPoll && [shouldAutoPoll boolValue]) 
@@ -315,53 +313,50 @@
     
 }
 
-- (void)jobUploaded:(NSNotification*)notification
-{
-	busy = NO;
-#if BZ_DEBUG_JOB
-	NSLog(@"Job uploaded");
-#endif
-    
-    [self restartIfRequired];
-    
-	[self processNextJob:YES];
-}
-
-- (void)failedToUploadJob:(NSNotification*)notification
-{
-#if BZ_DEBUG_JOB
-	NSLog(@"Failed to upload job");
-#endif
-	busy = NO;
-	
-	[idleView showError:@"Failed to upload"];
-    
-    [self restartIfRequired];
-
-	[self processNextJob:YES];
-}
-
 #pragma mark -
 #pragma mark BZWebViewControllerDelegate
+
+- (NSString*)getActiveUrl
+{
+    return activeURL;
+}
+
+- (void)jobFailed:(BZJob*)job
+{
+#if BZ_DEBUG_JOB
+	NSLog(@"Job Failed");
+#endif
+    //Dismiss the web view
+	[self dismissModalViewControllerAnimated:NO];
+
+    [idleView showError:@"Job failed"];
+
+    busy = NO;
+
+    [self restartIfRequired];
+
+    [self processNextJob:YES];
+}
 
 - (void)jobCompleted:(BZJob*)job withResult:(BZResult*)result
 {	
 #if BZ_DEBUG_PRINT_HAR
-	NSLog(@"Job completed: %@\n\n=====RESULT=====\n%@\n\n====RESULT END====\n", job, result);
+	NSLog(@"Job completed");
 #endif
 	
 	//Dismiss the web view
 	[self dismissModalViewControllerAnimated:NO];
-	
+
+    [idleView showUploading:@"Job succeeded"];
+
 	// Compress screenshots with the image quality setting of the job.
 	result.screenShotImageQuality = job.screenShotImageQuality;
 
-    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [idleView showUploading:@"Publishing Results"];
-        [[BZJobManager sharedInstance] publishResults:result url:activeURL];
-    //});
-
+	busy = NO;
     
+    [self restartIfRequired];
+
+	[self processNextJob:YES];
 }
 
 - (void)jobInterrupted:(BZJob*)job

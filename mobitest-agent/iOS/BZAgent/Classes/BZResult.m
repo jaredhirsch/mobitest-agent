@@ -72,13 +72,14 @@
 	}
 }
 
-- (void)endSessionAsTimeout
+- (void)removeAllSessions
 {
 	if (currentRun) {
-		[currentRun endAndMarkAsTimedOut];
+        NSLog(@"Programmer error -- session is running!");
 	}
-	
-	[self cleanupSession];
+    else {
+		[runs removeAllObjects];
+	}
 }
 
 - (void)setContentLength:(int)length

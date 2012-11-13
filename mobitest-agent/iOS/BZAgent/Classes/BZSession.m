@@ -93,19 +93,6 @@
 	self.endTime = [NSDate date];
 }
 
-- (void)endAndMarkAsTimedOut
-{
-	[self end];
-	
-	timedOut = YES;
-	
-	for (BZResource *resource in orderedResources) {
-		if (!resource.endTime) {
-			//TODO; We haven't received a response should we mark these as complete?
-		}
-	}
-}
-
 - (void)startLoading
 {
     if (self.startLoadTime == NULL) {

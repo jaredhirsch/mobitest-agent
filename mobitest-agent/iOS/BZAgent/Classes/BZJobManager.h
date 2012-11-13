@@ -25,10 +25,6 @@
 	
 	//We only spawn one fetch job request at a time. If needed, this can change to a dictionary and we can add identifiers to the connections
 	BZHTTPURLConnection *activeRequest;
-
-    // Active data
-    NSData *data;
-
 }
 
 @property (nonatomic, readonly) NSInteger jobCount;
@@ -52,9 +48,9 @@
 - (BZJob*)peekNextJob;
 
 //
-// Publishes the results
+// Publishes a result
 //
-- (void)publishResults:(BZResult*)result url:(NSString*)url;
+- (void)publishResult:(BZResult*)result url:(NSString*)url;
 
 - (void)postZip:(BZResult*)result url:(NSString*)url;
 

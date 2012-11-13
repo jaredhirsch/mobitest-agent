@@ -7,6 +7,7 @@
 
 #import "BZWebViewController.h"
 #import "BZAgentController.h"
+#import "BZJobManager.h"
 
 //Additions
 #import "NSData+Base64.h"
@@ -70,10 +71,14 @@ extern "C" CGImageRef UIGetScreenImage();
 		currentRun = 0;
 		currentSubRun = 0;
 		
-		cacheFolder = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] retain];
+        cachesFolder = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] retain];
+        resultFolder = [[cachesFolder stringByAppendingPathComponent:@"result"] retain];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveData:) name:BZDataReceivedNotification object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responseReceived:) name:BZResponseReceivedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultUploaded:) name:BZResultUploadedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resultUploadFailed:) name:BZResultUploadFailedNotification object:nil];
+        
 #if BZ_DEBUG_REQUESTS
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getDataSource:) name:BZPassDataSourceNotification object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getWebViewPrivate:) name:BZPassWebViewPrivateNotification object:nil];
@@ -105,7 +110,8 @@ extern "C" CGImageRef UIGetScreenImage();
 	[result release];
 	[webView release];
 	
-	[cacheFolder release];
+    [cachesFolder release];
+    [resultFolder release];
 	
 	[super dealloc];
 }
@@ -189,6 +195,8 @@ extern "C" CGImageRef UIGetScreenImage();
 	//Create the result
 	result = [[BZResult alloc] init];
 	result.jobId = job.testId;
+    // Compress screenshots with the image quality setting of the job.
+    result.screenShotImageQuality = job.screenShotImageQuality;
 	currentRun = 0;
 
 	//Now get started
@@ -262,22 +270,30 @@ extern "C" CGImageRef UIGetScreenImage();
 
 	webView.result = preCache ? nil : result;
 	
-	NSString *sessionImageFolder = nil;
-	if (!preCache) {
-		sessionImageFolder = [NSString stringWithFormat:@"video_%d%@", currentRun, (currentSubRun == 0 ? @"" : @"_cached")];
-		NSError *error = nil;
-		[[NSFileManager defaultManager] createDirectoryAtPath:[cacheFolder stringByAppendingPathComponent:sessionImageFolder] withIntermediateDirectories:YES attributes:nil error:&error];
-		if (error) {
-			NSLog(@"%@", error);
-		}
-	}
-	
-	[webView reset];
-	
+    if (![[NSFileManager defaultManager] fileExistsAtPath:resultFolder]) {
+        NSError *error = nil;
+        [[NSFileManager defaultManager] createDirectoryAtPath:resultFolder withIntermediateDirectories:YES attributes:nil error:&error];
+        if (error) {
+            NSLog(@"%@", error);
+        }
+    }
+
+    NSString *videoFolder = nil;
+ 	if (!preCache) {
+        videoFolder = [NSString stringWithFormat:@"video_%d%@", currentRun, (currentSubRun == 0 ? @"" : @"_cached")];
+ 		NSError *error = nil;
+        [[NSFileManager defaultManager] createDirectoryAtPath:[resultFolder stringByAppendingPathComponent:videoFolder] withIntermediateDirectories:YES attributes:nil error:&error];
+ 		if (error) {
+ 			NSLog(@"%@", error);
+ 		}
+ 	}
+
+ 	[webView reset];
+ 	
 	[self startTimeoutTimer];
 
 	if (!preCache) {
-		[result startSession:job.url identifier:[NSString stringWithFormat:@"page_%d_%d", currentRun, currentSubRun] videoFolder:sessionImageFolder];
+		[result startSession:job.url identifier:[NSString stringWithFormat:@"page_%d_%d", currentRun, currentSubRun] videoFolder:videoFolder];
         [self startRecording];
 	}
     
@@ -302,13 +318,35 @@ extern "C" CGImageRef UIGetScreenImage();
 		[result cleanupSession];
 	}
 	
-	if (currentRun == job.runs && (currentSubRun == 1 || job.fvOnly)) {
-		[self completeJob];
-	}
-	else {
-		//Start the cached session
+    //For now we upload after every run, but we could upload less often
+    BOOL shouldUploadNow = YES;
+
+    BOOL isDone = (currentRun >= job.runs && (currentSubRun == 1 || job.fvOnly));
+    if (!shouldUploadNow && !isDone) {
 		[self startSession];
 	}
+    else
+    {
+        //Create the JSON data in a different thread, since it may take a while (it may have sync requests in it)
+        __block NSData *data = nil;
+        dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            data = [result jsonDataFromResult];
+        });
+        //Now write the data to disk
+        NSString *harName = [NSString stringWithFormat:@"%d_%@result.har", currentRun,
+                             (currentSubRun == 1 ? @"Cached_" : @"")];
+        [data writeToFile:[resultFolder stringByAppendingPathComponent:harName] atomically:YES];
+        data = nil;
+        
+        //Upload this result
+        result.done = isDone;
+#if BZ_DEBUG_PRINT_HAR
+        NSLog(@"%@ completed: %@\n\n=====RESULT=====\n%@\n\n====RESULT END====\n", (result.done ? "Job" : "Run"), job, result);
+#endif
+        NSString *activeURL = (delegate ? [delegate getActiveUrl] : nil);
+        [[BZJobManager sharedInstance] publishResult:result url:activeURL];
+        //Our resultUploaded will call startSession or jobCompleted
+    }
 }
 
 - (void)fullyCompleteSession
@@ -387,9 +425,7 @@ extern "C" CGImageRef UIGetScreenImage();
 		}
 	}
 
-    NSString *cacheFolder = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] retain];
-    
-	NSString *libraryFolder = [cacheFolder stringByAppendingPathComponent:@"WebKit"];
+    NSString *libraryFolder = [cachesFolder stringByAppendingPathComponent:@"WebKit"];
 	NSError *error = nil;
 	[[NSFileManager defaultManager] removeItemAtPath:libraryFolder error:&error];
 	if (!error) {
@@ -399,7 +435,7 @@ extern "C" CGImageRef UIGetScreenImage();
 		}
 	}
 	
-	NSString *cookiesFolder = [cacheFolder stringByAppendingPathComponent:@"Cookies"];
+	NSString *cookiesFolder = [cachesFolder stringByAppendingPathComponent:@"Cookies"];
 	error = nil;
 	[[NSFileManager defaultManager] removeItemAtPath:cookiesFolder error:&error];
 	if (!error) {
@@ -409,7 +445,7 @@ extern "C" CGImageRef UIGetScreenImage();
 		}
 	}
     
-	NSString *browserCacheFolder = [cacheFolder stringByAppendingPathComponent:@"com.akamai.mobitest.agent"];
+	NSString *browserCacheFolder = [cachesFolder stringByAppendingPathComponent:@"com.akamai.mobitest.agent"];
 	error = nil;
 	[[NSFileManager defaultManager] removeItemAtPath:browserCacheFolder error:&error];
 	if (!error) {
@@ -420,7 +456,7 @@ extern "C" CGImageRef UIGetScreenImage();
 	}
     
     error = nil;
-    NSArray *cacheDirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:cacheFolder error:&error];
+    NSArray *cacheDirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:cachesFolder error:&error];
     if (error) {
         NSLog(@"%@", error);
     }
@@ -429,15 +465,13 @@ extern "C" CGImageRef UIGetScreenImage();
         if ([ext compare:@"localstorage"]==0)
         {
             error = nil;
-            NSString *fullCacheFile = [cacheFolder stringByAppendingPathComponent:cacheFile];
+            NSString *fullCacheFile = [cachesFolder stringByAppendingPathComponent:cacheFile];
             [[NSFileManager defaultManager] removeItemAtPath:fullCacheFile error:&error];
             if (error) {
                 NSLog(@"%@", error);
             }
         }
     }
-    
-    [cacheFolder release];
 }
 
 #pragma mark -
@@ -533,7 +567,11 @@ extern "C" CGImageRef UIGetScreenImage();
 		NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
 		
 		//TODO: We currently write to disk constantly, we should probably cache some of these and do batches if possible.
-		NSString *path = important ? [[cacheFolder stringByAppendingPathComponent:result.currentRun.videoFolder] stringByDeletingLastPathComponent] : [cacheFolder stringByAppendingPathComponent:result.currentRun.videoFolder];
+        NSString *path = [resultFolder stringByAppendingPathComponent:result.currentRun.videoFolder];
+        if (important) {
+            path = [path stringByDeletingLastPathComponent];
+        }
+
 		NSString *filePath = [path stringByAppendingPathComponent:identifier];
 		if ([imageData writeToFile:filePath atomically:NO]) {
 			if (important) {
@@ -689,6 +727,39 @@ id dummyDS;
 		}
 	}
 }
+
+- (void)clearResultFolder
+{
+    if ([[NSFileManager defaultManager] fileExistsAtPath:resultFolder]) {
+    		NSError *error = nil;
+    		[[NSFileManager defaultManager] removeItemAtPath:resultFolder error:&error];
+    		if (error) {
+    			NSLog(@"%@", error);
+    		}
+    	}
+    }
+
+- (void)resultUploaded:(NSNotification*)notification
+{
+    [self clearResultFolder];
+	[result removeAllSessions];
+
+	BOOL isDone = (currentRun >= job.runs && (currentSubRun == 1 || job.fvOnly));
+	if (isDone) {
+		[self completeJob];
+	}
+	else {
+		[self startSession];
+	}
+}
+
+- (void)resultUploadFailed:(NSNotification*)notification
+{
+	if (delegate) {
+		[delegate jobFailed:job];
+	}
+}
+
 
 #pragma mark -
 #pragma mark Important Page Load Milestones
