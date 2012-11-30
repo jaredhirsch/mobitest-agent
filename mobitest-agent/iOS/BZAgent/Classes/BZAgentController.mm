@@ -344,13 +344,13 @@
 	NSLog(@"Job completed");
 #endif
 	
+	// Compress screenshots with the image quality setting of the job.
+	result.screenShotImageQuality = job.screenShotImageQuality;
+    
 	//Dismiss the web view
 	[self dismissModalViewControllerAnimated:NO];
 
     [idleView showUploading:@"Job succeeded"];
-
-	// Compress screenshots with the image quality setting of the job.
-	result.screenShotImageQuality = job.screenShotImageQuality;
 
 	busy = NO;
     
