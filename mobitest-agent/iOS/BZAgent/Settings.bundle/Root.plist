@@ -20,65 +20,11 @@
 			<key>IsSecure</key>
 			<false/>
 			<key>Key</key>
-			<string>bz-jobs-url1</string>
+			<string>bz-jobs-url</string>
 			<key>KeyboardType</key>
 			<string>URL</string>
 			<key>Title</key>
-			<string>Jobs URL 1</string>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-		</dict>
-		<dict>
-			<key>AutocapitalizationType</key>
-			<string>None</string>
-			<key>AutocorrectionType</key>
-			<string>No</string>
-			<key>DefaultValue</key>
-			<string></string>
-			<key>IsSecure</key>
-			<false/>
-			<key>Key</key>
-			<string>bz-jobs-url2</string>
-			<key>KeyboardType</key>
-			<string>URL</string>
-			<key>Title</key>
-			<string>Jobs URL 2</string>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-		</dict>
-		<dict>
-			<key>AutocapitalizationType</key>
-			<string>None</string>
-			<key>AutocorrectionType</key>
-			<string>No</string>
-			<key>DefaultValue</key>
-			<string></string>
-			<key>IsSecure</key>
-			<false/>
-			<key>Key</key>
-			<string>bz-jobs-url3</string>
-			<key>KeyboardType</key>
-			<string>URL</string>
-			<key>Title</key>
-			<string>Jobs URL 3</string>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-		</dict>
-		<dict>
-			<key>AutocapitalizationType</key>
-			<string>None</string>
-			<key>AutocorrectionType</key>
-			<string>No</string>
-			<key>DefaultValue</key>
-			<string></string>
-			<key>IsSecure</key>
-			<false/>
-			<key>Key</key>
-			<string>bz-jobs-url4</string>
-			<key>KeyboardType</key>
-			<string>URL</string>
-			<key>Title</key>
-			<string>Jobs URL 4</string>
+			<string>Jobs URL</string>
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 		</dict>

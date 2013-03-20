@@ -47,10 +47,10 @@
 {
 	//Create the base with: Version of Har, Creator and Browser info.
 	return [NSMutableDictionary dictionaryWithObjectsAndKeys:
-														@"1.7", @"version",
+														@"1.8", @"version",
 			
 														[NSDictionary dictionaryWithObjectsAndKeys:	@"Mobitest", @"name",
-																									@"1.7", @"version", nil], @"creator",
+																									@"1.8", @"version", nil], @"creator",
 			
 														[NSDictionary dictionaryWithObjectsAndKeys: @"iOS - WebKit/Safari", @"name",
 																									[[UIDevice currentDevice] systemVersion], @"version", nil], @"browser",

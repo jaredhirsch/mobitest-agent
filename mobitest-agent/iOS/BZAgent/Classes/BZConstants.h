@@ -65,10 +65,7 @@ extern const NSString *BZPasswordKey;
 
 //Settings Bundle Keys
 //URL Files URL
-#define kBZJobsURL1SettingsKey @"bz-jobs-url1"
-#define kBZJobsURL2SettingsKey @"bz-jobs-url2"
-#define kBZJobsURL3SettingsKey @"bz-jobs-url3"
-#define kBZJobsURL4SettingsKey @"bz-jobs-url4"
+#define kBZJobsURLSettingsKey @"bz-jobs-url"
 #define kBZJobsAgentNameSettingsKey @"bz-jobs-agent-name"
 #define kBZJobsLocationSettingsKey @"bz-jobs-location"
 #define kBZJobsLocationKeySettingsKey @"bz-jobs-location-key"

@@ -141,18 +141,7 @@
 
 - (NSString*)getActiveUrlKeyFromInd:(NSInteger)ind
 {
-    switch(ind) {
-        case 0:
-            return kBZJobsURL1SettingsKey;
-        case 1:
-            return kBZJobsURL2SettingsKey;
-        case 2:
-            return kBZJobsURL3SettingsKey;
-        case 3:
-            return kBZJobsURL4SettingsKey;
-    }
-    return @"";
-    
+    return kBZJobsURLSettingsKey;    
 }
 
 - (void)switchActiveUrl

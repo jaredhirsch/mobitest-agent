@@ -75,21 +75,9 @@ void restartAndKill();
 {
 	//Ensure that our settings have default values
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSString *url1 = [defaults objectForKey:kBZJobsURL1SettingsKey];
-	if (!url1) {
-		[defaults setObject:@"http://your.wpt.server/" forKey:kBZJobsURL1SettingsKey];
-	}
-	NSString *url2 = [defaults objectForKey:kBZJobsURL2SettingsKey];
-	if (!url2) {
-		[defaults setObject:@"" forKey:kBZJobsURL2SettingsKey];
-	}
-	NSString *url3 = [defaults objectForKey:kBZJobsURL3SettingsKey];
-	if (!url3) {
-		[defaults setObject:@"" forKey:kBZJobsURL3SettingsKey];
-	}
-    NSString *url4 = [defaults objectForKey:kBZJobsURL4SettingsKey];
-	if (!url4) {
-		[defaults setObject:@"" forKey:kBZJobsURL4SettingsKey];
+	NSString *url = [defaults objectForKey:kBZJobsURLSettingsKey];
+	if (!url) {
+		[defaults setObject:@"http://your.wpt.server/" forKey:kBZJobsURLSettingsKey];
 	}
     
 	NSString *location = [defaults objectForKey:kBZJobsLocationSettingsKey];
